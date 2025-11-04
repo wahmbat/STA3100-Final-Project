@@ -1,35 +1,22 @@
 ---
 title: "STA3100 Final Project Report"
 author: "Anjali Tomerlin"
+bibliography: final_project_ref.bib
+link-citations: yes
+csl: ieee.csl
 output: 
   html_document:
     toc: true
     toc_depth: 2
-    toc_title: "Table of Contents"
     toc_float: true
     theme: cosmo
 date: "2025-11-03"
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-source("data_scraping.R")
-library(ggplot2)
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
 ```
 
-```{r}
-lst <- get_work_counts()
-
-#basic data investigation
-ggplot(lst$Mathematics,aes(x=year,y=counts)) + geom_point() + labs(title="Mathematics")
-ggplot(lst$Biology,aes(x=year,y=counts)) + geom_point() + labs(title="Biology")
-ggplot(lst$History,aes(x=year,y=counts)) + geom_point() + labs(title="History")
-ggplot(lst$CS,aes(x=year,y=counts)) + geom_point() + labs(title="Computer Science")
-ggplot(lst$Medicine,aes(x=year,y=counts)) + geom_point() + labs(title="Medicine")
-ggplot(lst$Art,aes(x=year,y=counts)) + geom_point() + labs(title="Art")
-ggplot(lst$Religion,aes(x=year,y=counts)) + geom_point() + labs(title="Religion")
-ggplot(lst$Philosophy,aes(x=year,y=counts)) + geom_point() + labs(title="Philosophy")
-ggplot(lst$Literature,aes(x=year,y=counts)) + geom_point() + labs(title="Literature")
-```
 
 
 # Abstract
@@ -38,19 +25,35 @@ ggplot(lst$Literature,aes(x=year,y=counts)) + geom_point() + labs(title="Literat
 
 ## Background Information
 
-Immediately following the advent of the COVID-19 pandemic in March of 2020, the focus of much academic research and funding was pivoted towards medicine. However, the long-term impact of this shift on the research in other areas, particularly the humanities, has often been overlooked. 
+Immediately following the advent of the COVID-19 pandemic in 2020, the focus of much academic research and funding pivoted towards medicine and public health However, the long-term impact of this shift on the prevalence of research in other areas, particularly the humanities, has been overlooked. Our study is motivated by the lack of available information and analysis on this topic, despite it being one of great importance. Research in the humanities, though often disregarded by those in STEM-related fields, is necessary as it fosters critical thinking, empathy, and a greater understanding of human society and culture.  
 
-Five years after the initial COVID-19 outbreak, we aim to investigate trends in the number of published works in humanities-related fields---including history, philosophy, art, literature, and religion---before and after the pandemic. We also aim to compare these emerging trends with those in medicine-related research. 
+A 2021 study investigated the effect the COVID-19 pandemic had on the production medicine research and found an estimated 18% decrease in non-COVID-19 related published works @biomedcentralImpactCOVID19. However, no prior studies have conducted a comprehensive review of the pandemic's effect on the production of research in the humanities.
+
+## Objectives
+
+Five years after the initial COVID-19 outbreak, we aim to investigate and compare the trends in the number of published works on medicine and humanities-related topics---including history, philosophy, art, literature, and law---before and after the pandemic. 
 
 # Data
 
-# Analysis and Result 
+The data sets used in our project are sourced from OpenAlex, an open-source catalog of scholarly papers that tracks the number of published papers that fall into various topics each year. Specifically, we utilize the data sets avaliable on OpenAlex's website for the number of published works whose 'concept' indicator are marked as history @openalexOpenAlexhistory, philosophy @openalexOpenAlexphilo, art @openalexOpenAlexart, literature @openalexOpenAlexlit, law @openalexOpenAlexlaw, and medicine @openalexOpenAlexmedicine. Although each of these OpenAlex data sets have numbers dating back to 1826, our analysis only considers those from years 2000 to 2024. 
+
+```{r}
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> mutate(topic=c("History"))
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Philosophy"))
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Art"))
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Literature"))
+law <- read_csv("./law_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Law"))
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Medicine"))
+all_topics <- bind_rows(history,philo,art,lit,law,medicine) |> filter(name <=2024, name >= 2000)
+ggplot(all_topics,aes(x=name,y=count,color=topic)) + geom_point() + labs(title="Number of Published Works by Field on OpenAlex (2000-2024)",x="Year",y="Number of Published Works",color="Field")
+```
+# Analysis and Results
 
 # Conclusion
 
-# Works Cited
-
 # Contribution Statement
+
+# Works Cited
 
 
 
