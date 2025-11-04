@@ -1,0 +1,56 @@
+---
+title: "STA3100 Final Project Report"
+author: "Anjali Tomerlin"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_title: "Table of Contents"
+    toc_float: true
+    theme: cosmo
+date: "2025-11-03"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("data_scraping.R")
+library(ggplot2)
+```
+
+```{r}
+lst <- get_work_counts()
+
+#basic data investigation
+ggplot(lst$Mathematics,aes(x=year,y=counts)) + geom_point() + labs(title="Mathematics")
+ggplot(lst$Biology,aes(x=year,y=counts)) + geom_point() + labs(title="Biology")
+ggplot(lst$History,aes(x=year,y=counts)) + geom_point() + labs(title="History")
+ggplot(lst$CS,aes(x=year,y=counts)) + geom_point() + labs(title="Computer Science")
+ggplot(lst$Medicine,aes(x=year,y=counts)) + geom_point() + labs(title="Medicine")
+ggplot(lst$Art,aes(x=year,y=counts)) + geom_point() + labs(title="Art")
+ggplot(lst$Religion,aes(x=year,y=counts)) + geom_point() + labs(title="Religion")
+ggplot(lst$Philosophy,aes(x=year,y=counts)) + geom_point() + labs(title="Philosophy")
+ggplot(lst$Literature,aes(x=year,y=counts)) + geom_point() + labs(title="Literature")
+```
+
+
+# Abstract
+
+# Introduction
+
+## Background Information
+
+Immediately following the advent of the COVID-19 pandemic in March of 2020, the focus of much academic research and funding was pivoted towards medicine. However, the long-term impact of this shift on the research in other areas, particularly the humanities, has often been overlooked. 
+
+Five years after the initial COVID-19 outbreak, we aim to investigate trends in the number of published works in humanities-related fields---including history, philosophy, art, literature, and religion---before and after the pandemic. We also aim to compare these emerging trends with those in medicine-related research. 
+
+# Data
+
+# Analysis and Result 
+
+# Conclusion
+
+# Works Cited
+
+# Contribution Statement
+
+
+
