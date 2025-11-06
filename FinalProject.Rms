@@ -1,3 +1,5 @@
+output="tibble"
+)
 (works$counts_by_year[[1]]$works_count)
 works$works_count
 (works$counts_by_year[[1]])
@@ -508,5 +510,3 @@ install.packages("gridExtra")
 install.packages(katex)
 install.packages("katex")
 savehistory(file = "FinalProject.Rms")
-savehistory(file = "FinalProject.Rmd")
-savehistory(file = "FinalProject.Rmd")
