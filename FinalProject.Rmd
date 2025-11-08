@@ -1,512 +1,453 @@
-(works$counts_by_year[[1]]$works_count)
-works$works_count
-(works$counts_by_year[[1]])
-works <- oa_fetch(
-entity = "concepts",
-id="C17744445",
-output="tibble"
-)
-(works$counts_by_year[[1]])
-works$works_count
-sum(works$counts_by_year[[1]]$works_count)
-works$works_count
-sum(works$counts_by_year[[1]]$works_count)
-(works$counts_by_year[[1]])
-works <- oa_fetch(
-entity = "concepts",
-id="C105795698",
-output="tibble"
-)
-(works$counts_by_year[[1]])
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","Computer Science","Medicine"),concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100"))
-View(concepts)
-works <- mapply(oa_fetch,entity="concepts",id=concepts$concept_id,output="tibble")
-View(works)
-concepts <- mutate(concepts,works=mapply(oa_fetch,entity="concepts",id=concepts$concept_id,output="tibble"))
-library(dpylr)
-library(dpylr)
-library(dplyr)
-concepts <- mutate(concepts,works=mapply(oa_fetch,entity="concepts",id=concepts$concept_id,output="tibble"))
-works <- oa_fetch(
-entity = "concepts",
-id="C105795698",
-output="tibble"
-)
-works <- works$counts_by_year
-works=mapply(oa_fetch,entity="concepts",id=concepts$concept_id,output="tibble")
-names(works)
-names(works)
-works[[1]]
-works[[2]]
-works[[3]]
-works$counts_by_year
-works
-works <- mapply(oa_fetch,entity="concepts",id=concepts$concept_id,output="tibble")
-View(works)
-typeof(works)
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","Computer Science","Medicine"),concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100"),counts=NULL)
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","Computer Science","Medicine"),concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100"),counts=vector("character",5))
-for (i in 1:nrow(concepts)){
-#concepts[i,"counts"] <-
-oa_fetch(entity="concept",id=concepts[i,"concept_id"])
-}
-for (i in 1:nrow(concepts)){
-#concepts[i,"counts"] <-
-print(oa_fetch(entity="concept",id=concepts[i,"concept_id"]))
-}
-for (i in 1:nrow(concepts)){
-#concepts[i,"counts"] <-
-print(oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]])
-}
-for (i in 1:nrow(concepts)){
-concepts[i,"counts"] <- print(oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]])
-}
-warnings()
-View(concepts)
-for (i in 1:nrow(concepts)){
-concepts[i,"counts"] <- print(oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year)
-}
-for (i in 1:nrow(concepts)){
-concepts[i,"counts"] <- (oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year)
-}
-for (i in 1:nrow(concepts)){
-print(oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year)
-}
-View(concepts)
-for (i in 1:nrow(concepts)){
-print(oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year$1)
-for (i in 1:nrow(concepts)){
-print(oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]])
-}
-View(concepts)
-list <- list()
-for (i in 1:nrow(concepts)){
-list <- append(list,oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]])
-}
-View(list)
-list <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-list <- append(list,data.frame(year=category_data$year,counts = category_data$works_counts))
-}
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-print(category_data)
-list <- append(list,data.frame(year=category_data$year,counts = category_data$works_counts))
-}
-print(category_data$year)
-print(category_data$works_counts)
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-list <- append(list,data.frame(year=category_data$year,counts = category_data$works_count))
-}
-names(counts_by_years) <- concepts$concept_name
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-counts_by_years <- append(counts_by_years,data.frame(year=category_data$year,counts = category_data$works_count))
-}
-names(counts_by_years) <- concepts$concept_name
-counts_by_years$Mathematics
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count)
-print(frame)
-counts_by_years <- append(counts_by_years,frame)
-}
-counts_by_years$Mathematics
-counts_by_years
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count)
-print(frame)
-counts_by_years <- append(counts_by_years,frame)
-}
-counts_by_years
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","Computer Science","Medicine"),concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100"),counts=vector("character",5))
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count)
-print(frame)
-counts_by_years <- append(counts_by_years,frame)
-}
-counts_by_years
-View(counts_by_years)
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","Computer Science","Medicine"),concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100"),counts=vector("character",5))
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count)
-print(frame)
-counts_by_years <- append(counts_by_years,frame)
-}
-View(counts_by_years)
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count)
-counts_by_years[length(counts_by_years)+1] <- frame
-}
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","Computer Science","Medicine"),concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100"),counts=vector("character",5))
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count)
-counts_by_years[length(counts_by_years)+1] <- frame
-}
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","Computer Science","Medicine"),concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100"),counts=vector("character",5))
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-View(counts_by_years)
-counts_by_years$Mathematics
-names(counts_by_years) <- concepts$concept_name
-counts_by_years$Mathematics
-#install openalexR package if not done already
-library(openalexR)
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","Computer Science","Medicine"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100"),
-counts=vector("character",5))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-names(counts_by_years) <- concepts$concept_name
-#install openalexR package if not done already
-library(openalexR)
-library(dplyr)
-get_work_counts <- function(){
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","CS","Medicine","Art","Religion","Philosophy","Literature"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100","C142362112","C24667770","C138885662","C124952713"))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count) |> filter(year<=2024)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-names(counts_by_years) <- concepts$concept_name
-return(counts_by_years)
-}
-#install openalexR package if not done already
-library(openalexR)
-library(dplyr)
-get_work_counts <- function(){
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","CS","Medicine","Art","Religion","Philosophy","Literature"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100","C142362112","C24667770","C138885662","C124952713"))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count) |> filter(year<=2024)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-names(counts_by_years) <- concepts$concept_name
-return(counts_by_years)
-}
-get_work_counts()
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","CS","Medicine","Art","Religion","Philosophy","Literature"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100","C142362112","C24667770","C138885662","C124952713"))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count) |> filter(year<=2024)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-print(category_data)
-frame <- data.frame(year=category_data$year,counts = category_data$works_count) |> filter(year<=2024)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-oa_fetch(entity="concept",id=concepts["Mathematics","concept_id"])$counts_by_year[[1]]
-oa_fetch(entity="concept",id=concepts[1,"concept_id"])$counts_by_year[[1]]
-oa_fetch(entity="concept",id=concepts[1,"concept_id"])
-oa_fetch(entity="concept",id=C33923547)
-oa_fetch(entity="concept",id="C33923547")
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]] |> as.data.frame()
-#install openalexR package if not done already
-library(openalexR)
-get_work_counts <- function(){
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","CS","Medicine","Art","Religion","Philosophy","Literature"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100","C142362112","C24667770","C138885662","C124952713"))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-names(counts_by_years) <- concepts$concept_name
-return(counts_by_years)
-}
-#install openalexR package if not done already
-library(openalexR)
-get_work_counts <- function(){
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","CS","Medicine","Art","Religion","Philosophy","Literature"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100","C142362112","C24667770","C138885662","C124952713"))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count) |> subset(year<=2024)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-names(counts_by_years) <- concepts$concept_name
-return(counts_by_years)
-}
-get_work_counts()
-#install openalexR package if not done already
-library(openalexR)
-get_work_counts <- function(){
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","CS","Medicine","Art","Religion","Philosophy","Literature"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100","C142362112","C24667770","C138885662","C124952713"))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count) |> subset(year<=2024)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-names(counts_by_years) <- concepts$concept_name
-return(counts_by_years)
-}
-get_work_counts()
-#install openalexR package if not done already
-library(openalexR)
-get_work_counts <- function(){
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","CS","Medicine","Art","Religion","Philosophy","Literature"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100","C142362112","C24667770","C138885662","C124952713"))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"],output="data frame")$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count) |> subset(year<=2024)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-names(counts_by_years) <- concepts$concept_name
-return(counts_by_years)
-}
-get_work_counts()
-#install openalexR package if not done already
-library(openalexR)
-get_work_counts <- function(){
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","CS","Medicine","Art","Religion","Philosophy","Literature"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100","C142362112","C24667770","C138885662","C124952713"))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"],output="dataframe")$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count) |> subset(year<=2024)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-names(counts_by_years) <- concepts$concept_name
-return(counts_by_years)
-}
-get_work_counts()
-#install openalexR package if not done already
-library(openalexR)
-get_work_counts <- function(){
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","CS","Medicine","Art","Religion","Philosophy","Literature"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100","C142362112","C24667770","C138885662","C124952713"))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])
-category_data <- category_data$counts_by_year[[1]]
-category_data <- tibble::as.tibble(category_data,.name_repair="unique")
-frame <- data.frame(year=category_data$year,counts = category_data$works_count) |> subset(year<=2024)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-names(counts_by_years) <- concepts$concept_name
-return(counts_by_years)
-}
-get_work_counts()
-#install openalexR package if not done already
-library(openalexR)
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","Computer Science","Medicine"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100"),
-counts=vector("character",5))
-#getting all concept's work counts for each year (going back to 2012) as a data frame and nesting in list
-counts_by_years <- list()
-for (i in 1:nrow(concepts)){
-category_data <- oa_fetch(entity="concept",id=concepts[i,"concept_id"])$counts_by_year[[1]]
-frame <- data.frame(year=category_data$year,counts = category_data$works_count)
-counts_by_years[[length(counts_by_years)+1]] <- frame
-}
-category_data <- oa_fetch(entity="concept",id=concepts[1,"concept_id"])
-#install openalexR package if not done already
-library(openalexR)
-install.packages(openalexR)
-install.packages("openalexR")
-oa_fetch(entity="concept",search="computer")
-#install openalexR package if not done already
-library(openalexR)
-oa_fetch(entity="concept",search="computer")
-#install openalexR package if not done already
-library(openalexR)
-oa_fetch(entity="concept",search="computer")
-oa_fetch(entity="concept",search="computer")
-#install openalexR package if not done already
-library(openalexR)
-oa_fetch(entity="concept",search="computer")
-oa_fetch(entity="concepts",search="computer")
-oa_fetch_safe <- function(entity, id) {
-url <- paste0("https://api.openalex.org/", entity, "/", id)
-jsonlite::fromJSON(url, flatten = FALSE)  # avoid tibble flattening
-}
-data <- oa_fetch_safe("concept", "C33923547")
-oa_fetch_safe <- function(entity, id) {
-url <- paste0("https://api.openalex.org/", entity, "/", id)
-jsonlite::fromJSON(url, flatten = FALSE)  # avoid tibble flattening
-}
-data <- oa_fetch_safe("concept", "c33923547")
-oa_fetch_safe <- function(entity, id) {
-url <- paste0("https://api.openalex.org/", entity, "/", id)
-jsonlite::fromJSON(url, flatten = FALSE)  # avoid tibble flattening
-}
-data <- oa_fetch_safe("concepts", "c33923547")
-View(data)
-oa_fetch_safe <- function(entity, id) {
-url <- paste0("https://api.openalex.org/", entity, "/", id)
-jsonlite::fromJSON(url)  # avoid tibble flattening
-}
-data <- oa_fetch_safe("concepts", "c33923547")
-View(data)
-oa_fetch_safe <- function(entity, id) {
-url <- paste0("https://api.openalex.org/", entity, "/", id)
-jsonlite::fromJSON(url)  # avoid tibble flattening
-}
-data <- oa_fetch_safe("concepts", "c33923547")
-View(data)
-oa_fetch_safe <- function(entity, id) {
-url <- paste0("https://api.openalex.org/", entity, "/", id)
-jsonlite::fromJSON(url)  # avoid tibble flattening
-}
-data <- oa_fetch_safe("concepts", "C33923547")
-View(data)
-oa_fetch(entity="concept",id="C41008148")
-oa_fetch(entity="concept",id="C41008148")
-oa_fetch_safe <- function(entity, id) {
-url <- paste0("https://api.openalex.org/", entity, "/", id)
-jsonlite::fromJSON(url)  # avoid tibble flattening
-}
-data <- oa_fetch_safe("concepts", "C41008148")
-View(data)
-oa_fetch_safe <- function(entity, id) {
-url <- paste0("https://api.openalex.org/", entity, "/", id)
-jsonlite::fromJSON(url)  # avoid tibble flattening
-}
-data <- oa_fetch_safe("concepts", "C41008148")
-View(data)
-oa_fetch_safe <- function(entity, id) {
-url <- paste0("https://api.openalex.org/", entity, "/", id)
-jsonlite::fromJSON(url)  # avoid tibble flattening
-}
-data <- oa_fetch_safe("concepts", "C41008148")
-View(data)
-oa_fetch_safe <- function(entity, id) {
-url <- paste0("https://api.openalex.org/", entity, "/", id)
-jsonlite::fromJSON(url)  # avoid tibble flattening
-}
-data <- oa_fetch_safe("concepts", "C41008148")
-View(data)
-oa_fetch(entity="s")
-oa_fetch(entity="topics")
-oa_fetch(entity="topics",display_name="Artificial Intelligence")
-oa_fetch(entity="topics",display_name="Artificial Intelligence in Medicine")
-oa_fetch(entity="topics",search="Artificial Intelligence in Medicine")
-data<- oa_fetch(entity="topics",search="Artificial Intelligence in Medicine")
-category_data <- oa_fetch(entity="topics",id=concepts[1,"concept_id"])$counts_by_year[[1]]
-#data frame of concepts of interest and their IDs
-concepts <- data.frame(concept_name = c("Mathematics","Biology","History","CS","Medicine","Art","Religion","Philosophy","Literature"),
-concept_id=c("C33923547","C86803240","C95457728","C41008148","C71924100","C142362112","C24667770","C138885662","C124952713"))
-category_data <- oa_fetch(entity="topics",id=concepts[1,"concept_id"])$counts_by_year[[1]]
-category_data <- oa_fetch(entity="concepts",id=concepts[1,"concept_id"])$counts_by_year[[1]]
-category_data <- oa_fetch(entity="worky",id=concepts[1,"concept_id"])$counts_by_year[[1]]
-category_data <- oa_fetch(entity="topics",id=concepts[1,"concept_id"])$counts_by_year[[1]]
-category_data <- oa_fetch(entity="topics",search="C2778407487")$counts_by_year[[1]]
-concepts <- oa_fetch(
-entity = "concepts",
-search = "quantum computing"
-)
-recent_ai_works <- oa_fetch(
-entity = "works",
-filter = list(
-`concepts.id` = "https://openalex.org/C2778407487",
-from_publication_date = "2022-01-01"
-)
-)
-category_data <- oa_fetch(entity="domain",search="C2778407487")$counts_by_year[[1]]
-category_data <- oa_fetch(entity="topics", options= list(domain="Health Science"))
-category_data <- oa_fetch(entity="topics", search="Health Science")
-View(category_data)
-cs_works <- oa_fetch(
-entity = "works",
-query = "concepts.id:https://openalex.org/C1975727201"
-)
-oa_fetch(entity="concepts",search="history")
-oa_fetch(entity="works",search="https://api.openalex.org/topics?filter=subfield.id:2713")
-oa_fetch(entity = "topics", search = "artificial intelligence")
-oa_fetch(entity = "works", search = "artificial intelligence")
-oa_fetch(entity="concepts",from_created_date = "2023-01-01")
-#install openalexR package if not done already
-library(openalexR)
-oa_fetch(entity="concepts",from_created_date = "2023-01-01")
-oa_fetch(entity="concepts")
-oa_fetch(entity="concepts",search="AI")
-install.packages("jsonlite")
-install.packages("jsonlite")
-data <- GET("https://api.openalex.org/works?group_by=publication_year&per_page=200&filter=concepts.id:c33923547")
-install.packages("rvest")
-library(rvest)
-data <- GET("https://api.openalex.org/works?group_by=publication_year&per_page=200&filter=concepts.id:c33923547")
-library(rvest)
-data <- GET("https://api.openalex.org/works?group_by=publication_year&per_page=200&filter=concepts.id:c33923547")
-data <- read.html("https://api.openalex.org/works?group_by=publication_year&per_page=200&filter=concepts.id:c33923547")
-data <- read_html("https://api.openalex.org/works?group_by=publication_year&per_page=200&filter=concepts.id:c33923547")
-View(data)
-install.packages("httr")
-install.packages("httr")
-library(httr)
-data <- GET("https://api.openalex.org/works?group_by=publication_year&per_page=200&filter=concepts.id:c33923547")
-View(data)
-getwd()
-knitr::opts_chunk$set(echo = TRUE)
+---
+title: "STA3100 Final Project Report"
+author: "Anjali Tomerlin and Elena Pedeton"
+bibliography: final_project_ref.bib
+link-citations: yes
+csl: ieee.csl
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: cosmo
+    css: style.css
+date: "2025-11-03"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
-history <- read_csv("./history_counts")
-history <- read_csv("./history_counts")
-getwd()
-history <- read_csv("./history_counts.csv")
-install.packages("gridExtra")
-install.packages(katex)
-install.packages("katex")
-savehistory(file = "FinalProject.Rms")
-savehistory(file = "FinalProject.Rmd")
-savehistory(file = "FinalProject.Rmd")
+library(gridExtra)
+library(segmented)
+library(gt)
+library(grid)
+```
+
+
+
+# Abstract
+
+# Introduction
+
+## Background Information
+
+---
+
+Immediately following the advent of the COVID-19 pandemic in 2020, the focus of much academic research and funding pivoted towards the medicine and public health sectors. However, the long-term impact of this shift on the prevalence of research in other areas, particularly the humanities, has been overlooked. Our study is motivated by the lack of available information and analysis on this topic, despite it being one of great importance. Research in the humanities, though often disregarded by those in STEM-related fields, is necessary as it fosters critical thinking, empathy, and a greater understanding of human society and culture.  
+
+A 2021 study investigated the effect the COVID-19 pandemic had on the production medicine research and found an estimated 18% decrease in non-COVID-19 related published works @biomedcentralImpactCOVID19. However, no prior studies have conducted a comprehensive review of the pandemic's effect on the production of research in the humanities.
+
+## Objectives
+
+---
+
+Five years after the initial COVID-19 outbreak, we aim to investigate and compare the trends in the number of published works on medicine and humanities-related fields---specifically history, philosophy, art, and literature---before and after the pandemic. We also aim to compare more generally the number of published works in the humanities with those in medicine. Our analysis will highlight any potential difference in research productivity between fields or patterns of decline in research pre and post-pandemic. By doing so, we hope to call attention to the importance of the humanities and, more broadly, research in academia.
+
+
+# Data & Preliminary Analysis
+
+---
+
+The data sets used in our project are sourced from OpenAlex, an open-source catalog of scholarly works. OpenAlex categorizes works using a hierarchical structure known as *concepts*. There are 19 root-level concepts, which represent broad categories of research such as Engineering and History, and 6 branching layers of concepts, each increasing in topic specificity @openalexConceptsOpenAlex. 
+
+We utilize OpenAlex's data sets for the number of published works whose concept classifiers are history @openalexOpenAlexhistory, philosophy @openalexOpenAlexphilo, art @openalexOpenAlexart, literature @openalexOpenAlexlit, and medicine @openalexOpenAlexmedicine. All of these fall into level 0 of the concept hierarchy, the most broad category, except for literature, which is slightly more specific at level 1. Although each of these OpenAlex data sets have values dating back to 1826, our analysis only considers those from years 2000 to 2024 for relevancy. 
+
+## Trend Evaluation
+
+---
+
+```{r Scatterplot all Fields/Years,fig.align='center'}
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> mutate(topic=c("History"))
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Philosophy"))
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Art"))
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Literature"))
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Medicine"))
+all_topics <- bind_rows(history,philo,art,lit,medicine) |> filter(name <=2024, name >= 2000)
+ggplot(all_topics,aes(x=name,y=count,color=topic)) + geom_point() + labs(title="Number of Published Works by Field on OpenAlex (2000-2024)",x="Year",y="Number of Published Works",color="Field")
+```
+
+---
+
+It is clear from the scatterplot above that all four humanities-related fields---history, philosophy, art, and literature---display an increasing trend in number of published works from 2000 to 2020 and a decreasing trend thereafter. 
+
+---
+
+```{r Literature Pre/Post 2020 Plots,fig.align='center'}
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE)
+pre2020 <- ggplot(filter(lit,name<2020,name>=2000),aes(x=name,y=count)) + geom_point() + labs(title="Number of Literature-Related Published Works on OpenAlex (2000-2019)",x="Year",y="Number of Published Works")
+post2020 <- ggplot(filter(lit,name>=2020,name<=2024),aes(x=name,y=count)) + geom_point() + labs(title="Number of Literature-Related Published Works on OpenAlex (2020-2024)",x="Year",y="Number of Published Works")
+grid.arrange(pre2020,post2020)
+```
+
+---
+
+However, medicine is distinct as it displays a clear upward trend in the number of published works from 2000 to 2020 but does not exhibit an immediately apparent pattern thereafter. Additionally, the number of medicine-related works spikes in 2020, presumably in response to the emerging pandemic. 
+
+---
+
+```{r Medicine Pre/Post 2020 Plots,fig.align='center'}
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE)
+pre2020 <- ggplot(filter(medicine,name<2020,name>=2000),aes(x=name,y=count)) + geom_point() + labs(title="Number of Medicine-Related Published Works on OpenAlex (2000-2019)",x="Year",y="Number of Published Works")
+post2020 <- ggplot(filter(medicine,name>=2020,name<=2024),aes(x=name,y=count)) + geom_point() + labs(title="Number of Medicine-Related Published Works on OpenAlex (2020-2024)",x="Year",y="Number of Published Works")
+grid.arrange(pre2020,post2020)
+```
+
+These trends suggest a decline in emphasis on funding and publishing humanities-related research following the pandemic in 2020 whereas the field of medicine experienced little such effect, remaining relatively stable. However, further analysis is required to establish this (See [Analysis and Results](#analysis-and-results)).
+
+## Comparing Fields
+
+---
+```{r Mean Difference Calculations}
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+
+hum_2024 <- round(mean(c(history$count,philo$count,art$count,lit$count)))
+med_2024 <- round(mean(medicine$count))
+diff_2024 <- format(med_2024-hum_2024,scientific=FALSE)
+hum_2024 <- format(hum_2024,scientific=FALSE)
+med_2024 <- format(med_2024,scientific=FALSE)
+
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> filter(name<=2019,name>=2000)
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> filter(name<=2019,name>=2000)
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |> filter(name<=2019,name>=2000)
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |> filter(name<=2019,name>=2000)
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> filter(name<=2019,name>=2000)
+
+hum_2019 <- round(mean(c(history$count,philo$count,art$count,lit$count)))
+med_2019 <- round(mean(medicine$count))
+diff_2019 <- format(med_2019-hum_2019,scientific=FALSE)
+```
+
+The average number of medicine-related published works from 2000 to 2024 exceeds the average for the four humanities-related fields by `r diff_2024`. This is true even for years prior to 2020, a difference of `r diff_2019`, indicating that medicine was a consistently more productive topic of research the humanities even prior to the pandemic. 
+
+Additionally, the average number published works from 2000 to 2024 varies much more between medicine the humanities than between the humanities fields themselves. 
+
+---
+
+```{r Mean Difference Plot,fig.align='center'}
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+
+mean_df <- data.frame(group = as.factor(c("History","Philosophy","Art","Literature","Medicine")),m=c(mean(history$count),mean(philo$count),mean(art$count),mean(lit$count),mean(medicine$count)))
+
+diff_matrix <- outer(mean_df$m,mean_df$m,"-")
+rownames(diff_matrix) <- mean_df$group
+colnames(diff_matrix) <- mean_df$group
+
+diff_table <- as.data.frame(as.table(diff_matrix))
+colnames(diff_table) <- c("field1","field2","diff")
+
+diff_table <- mutate(diff_table,i=match(field1,mean_df$group),j=match(field2,mean_df$group)) |> filter(i>j)
+
+ggplot(diff_table,aes(x=field1,y=field2,fill=diff)) + geom_tile(color="white") + geom_text(aes(label=round(diff)),color="black",size=4) + scale_fill_gradient(low="lightblue",high="mediumpurple",name="Mean Difference") + labs(x=NULL,y=NULL,title="Pairwise Mean Differences in Number of Published Works from 2000 to 2024")
+```
+
+---
+
+The variation in number of published works from 2000 to 2024 is much higher for medicine than the humanities-related fields, reflecting its steeper upward trend in publication output over time. 
+
+---
+
+```{r SD Table,fig.align='center'}
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000)
+
+sd_df <- data.frame(field = as.factor(c("History","Philosophy","Art","Literature","Medicine")),s=c(sd(history$count),sd(philo$count),sd(art$count),sd(lit$count),sd(medicine$count))) |> mutate(s=round(s)) |> arrange(s)
+
+gt(sd_df) |> cols_label(field="Field",s="Standard Deviation") |> tab_style(style = cell_text(weight = "bold"), locations=cells_column_labels())
+```
+    
+---  
+
+```{r Boxplots,fig.align='center'}
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> mutate(topic=c("History"))
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Philosophy"))
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Art"))
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Literature"))
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Medicine"))
+all_topics <- bind_rows(history,philo,art,lit,medicine) |> filter(name <=2024, name >= 2000)
+
+ggplot(all_topics,aes(x=topic,y=count)) + geom_boxplot() + labs(title="Number of Published Works from 2000 to 2024 Across Fields",y="Number of Published Works",x=NULL)
+```
+
+# Analysis and Results
+
+---
+
+Our primary analysis will consist of two procedures:
+
+1. Conduct an interrupted time-series (ITS) analysis on the number of published works before and after the onset of the COVID-19 pandemic in 2020 for each of the five research fields---history, philosophy, art, literature, and medicine---using a segmented linear regression model.
+
+2. Perform Chow's Test to evaluate whether the presumed structural break point---the COVID-19 pandemic in 2020---corresponds to a statistically significant shift in the parameters of the previously constructed segmented regression model. 
+
+## ITS Analysis
+
+---
+
+The data for each of the five research fields will be split into two groups, data prior to and at the start of the COVID-19 pandemic (years 2000 to 2020) and after the pandemic's initial outbreak (years 2021 to 2024). Five segmented linear regression models will be constructed each with a singular structural break point at the year 2020. This will result in five separate segmented linear regression functions for each field with the independent variable $\small t$, measured in years since 2000, and dependent variable $\small \hat{y}(t)$, the estimated number of works published in that field at time $\small t$. 
+
+The segmented linear regression model constructs a linear regression using the method of ordinary least squares for points before and after a number of specified break points while ensuring continuity between regression segments at the break point. This that the two separate linear regression functions which are constructed for $\small t\leq20$ and $\small t>20$ meet at $\small t=20$ exactly. A segmented linear regression model for the number of of published works $\small Y_i$ at a time $\small t_i$, measured in years since 2000 is formulated as follows:
+
+---
+
+$$Y_i=\beta_0+\beta_1t_i+\beta_2(t_i-20)^++\epsilon_i$$
+
+<br>
+
+- $\small \beta_0$: Regression intercept for first linear segment ($\small t_i\leq20$)
+
+- $\small \beta_1$: Regression slope for first linear segment ($\small t_i\leq20$)
+
+- $\small \beta_2$: Change in regression slope for second linear segment compared to the first
+
+- $\small (t_i-20)^+$: Piecewise function where $\small (t_i-20)^+=t_i-20$ if $\small t_i>20$ and $\small (t_i-20)^+=0$ if $\small t_i\leq20$
+
+- $\small \epsilon_i$: Error term
+
+---
+
+Alternatively, the model can be formulated as the following piecewise function:
+
+<br>
+
+$$Y_i=\begin{cases} \beta_0+\beta_1t_i+\epsilon_i &\text{if } t \leq 20 \\ (\beta_0-20\beta_2)+(\beta_1+\beta_2)t_i+\epsilon_i &\text{if } t > 20 \end{cases}$$
+<br>
+
+We will utilize this formulation going forward. From this model, the following regression with estimated coefficients can be calculated for each fields:
+
+---
+
+$$\hat{y}(t)=\begin{cases} a_1 + b_1t& \text{if } t \leq 20 \\ a_2 + b_2t & \text{if } t > 20
+\end{cases}$$
+
+<br>
+
+- $\small a_1=\hat{\beta_0}$
+
+- $\small b_1=\hat{\beta_1}$
+
+- $\small a_2=\hat{\beta_0}-20\hat{\beta_2}$
+
+- $\small b_2=\hat{\beta_1}+\hat{\beta_2}$
+
+---
+
+The following table reports the regression parameter estimates for each of the five constructed segmented linear regression models:
+
+```{r Segmented Regression History Plot}
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+
+init_ols_hist <- lm(count ~ name,data=history) 
+segmented_ols_hist <- segmented(init_ols_hist,seg.Z= ~name,psi=list(name=20),control = seg.control(it.max = 0))
+history$pred <- predict(segmented_ols_hist)
+hist_plot <- ggplot(history,aes(x=name,y=count)) + geom_point() + geom_line(aes(y=pred)) + labs(title="History",x=NULL,y=NULL)+ theme(plot.title = element_text(size=11,hjust = 0.5))
+```
+
+```{r Segmented Regression History Eq}
+hist_intercept_1 <- format(round(coefficients(segmented_ols_hist)[[1]]),scientific=FALSE)
+hist_coef_1 <- format(round(coefficients(segmented_ols_hist)[[2]]), scientific=FALSE)
+hist_coef_2 <- format(round(coefficients(segmented_ols_hist)[[3]]+coefficients(segmented_ols_hist)[[2]]),scientific=FALSE)
+hist_intercept_2 <- round(coefficients(segmented_ols_hist)[[1]]-coefficients(segmented_ols_hist)[[3]]*20)
+hist_intercept_2 <- format(hist_intercept_2,scientific=FALSE)
+```
+
+```{r Segmented Regression Philosophy Plot}
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+
+init_ols_philo <- lm(count ~ name,data=philo)
+segmented_ols_philo <- segmented(init_ols_philo,seg.Z= ~name,psi=list(name=20),control = seg.control(it.max = 0))
+philo$pred <- predict(segmented_ols_philo)
+philo_plot <- ggplot(philo,aes(x=name,y=count)) + geom_point() + geom_line(aes(y=pred)) + labs(title="Philosophy",x=NULL,y=NULL) + theme(plot.title = element_text(size=11,hjust = 0.5))
+```
+
+```{r Segmented Regression Philo Eq}
+philo_intercept_1 <- format(round(coefficients(segmented_ols_philo)[[1]]),scientific=FALSE)
+philo_coef_1 <- format(round(coefficients(segmented_ols_philo)[[2]]), scientific=FALSE)
+philo_coef_2 <- format(round(coefficients(segmented_ols_philo)[[3]]+coefficients(segmented_ols_philo)[[2]]),scientific=FALSE)
+philo_intercept_2 <- round(coefficients(segmented_ols_philo)[[1]]-coefficients(segmented_ols_philo)[[3]]*20)
+philo_intercept_2 <- format(philo_intercept_2,scientific=FALSE)
+```
+
+```{r Segmented Regression Art Plot}
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+
+init_ols_art <- lm(count ~ name,data=art)
+segmented_ols_art <- segmented(init_ols_art,seg.Z= ~name,psi=list(name=20),control = seg.control(it.max = 0))
+art$pred <- predict(segmented_ols_art)
+art_plot <- ggplot(art,aes(x=name,y=count)) + geom_point() + geom_line(aes(y=pred)) + labs(title="Art",x=NULL,y=NULL) + theme(plot.title = element_text(size=11,hjust = 0.5))
+```
+
+```{r Segmented Regression Art Eq}
+art_intercept_1 <- format(round(coefficients(segmented_ols_art)[[1]]),scientific=FALSE)
+art_coef_1 <- format(round(coefficients(segmented_ols_art)[[2]]), scientific=FALSE)
+art_coef_2 <- format(round(coefficients(segmented_ols_art)[[3]]+coefficients(segmented_ols_art)[[2]]),scientific=FALSE)
+art_intercept_2 <- round(coefficients(segmented_ols_art)[[1]]-coefficients(segmented_ols_art)[[3]]*20)
+art_intercept_2 <- format(art_intercept_2,scientific=FALSE)
+```
+
+```{r Segmented Regression Literature Plot}
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+
+init_ols_lit <- lm(count ~ name,data=lit)
+segmented_ols_lit <- segmented(init_ols_lit,seg.Z= ~name,psi=list(name=20),control = seg.control(it.max = 0))
+lit$pred <- predict(segmented_ols_lit)
+lit_plot <- ggplot(lit,aes(x=name,y=count)) + geom_point() + geom_line(aes(y=pred)) + labs(title="Literature",x=NULL,y=NULL) + theme(plot.title = element_text(size=11,hjust = 0.5))
+```
+
+```{r Segmented Regression Lit Eq}
+lit_intercept_1 <- format(round(coefficients(segmented_ols_lit)[[1]]),scientific=FALSE)
+lit_coef_1 <- format(round(coefficients(segmented_ols_lit)[[2]]), scientific=FALSE)
+lit_coef_2 <- format(round(coefficients(segmented_ols_lit)[[3]]+coefficients(segmented_ols_lit)[[2]]),scientific=FALSE)
+lit_intercept_2 <- round(coefficients(segmented_ols_lit)[[1]]-coefficients(segmented_ols_lit)[[3]]*20)
+lit_intercept_2 <- format(lit_intercept_2,scientific=FALSE)
+```
+
+```{r Segmented Regression Medicine Plot}
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+
+init_ols_med <- lm(count ~ name,data=medicine)
+segmented_ols_med <- segmented(init_ols_med,seg.Z= ~name,psi=list(name=20),control = seg.control(it.max = 0))
+medicine$pred <- predict(segmented_ols_med)
+med_plot <- ggplot(medicine,aes(x=name,y=count)) + geom_point() + geom_line(aes(y=pred)) + labs(title="Segmented Regression for Number of Medicine-Related Works Versus Year",x="Years Since 2000",y="Number of Published Works")
+```
+
+```{r Segmented Regression Med Eq}
+med_intercept_1 <- format(round(coefficients(segmented_ols_med)[[1]]),scientific=FALSE)
+med_coef_1 <- format(round(coefficients(segmented_ols_med)[[2]]), scientific=FALSE)
+med_coef_2 <- format(round(coefficients(segmented_ols_med)[[3]]+coefficients(segmented_ols_med)[[2]]),scientific=FALSE)
+med_intercept_2 <- round(coefficients(segmented_ols_med)[[1]]-coefficients(segmented_ols_med)[[3]]*20)
+med_intercept_2 <- format(med_intercept_2,scientific=FALSE)
+```
+<br>
+
+```{r Regression Table}
+reg_table <- data.frame(a1=c(hist_intercept_1,philo_intercept_1,art_intercept_1,lit_intercept_1,med_intercept_1),b1=c(hist_coef_1,philo_coef_1,art_coef_1,lit_coef_1,med_coef_1),a2=c(hist_intercept_2,philo_intercept_2,art_intercept_2,lit_intercept_2,med_intercept_2),b2=c(hist_coef_2,philo_coef_2,art_coef_2,lit_coef_2,med_coef_2),names=c("History","Philosophy","Art","Literature","Medicine"))
+
+gt(reg_table,rowname_col="names")|> cols_label(a1=html("a<sub>1</sub>"),b1=html("b<sub>1</sub>"),a2=html("a<sub>2</sub>"),b2=html("b<sub>2</sub>")) |> tab_style(style = cell_text(align="center",weight = "bold"), locations=cells_column_labels())
+
+```
+
+---
+
+```{r Regression Plots Humanities,fig.align='center'}
+grid.arrange(hist_plot,philo_plot,art_plot,lit_plot,top=textGrob("Number of Humanities-Related Published Works Versus Years Since 2000",gp=gpar(fontsize = 14)),padding = unit(1, "lines"))
+```
+
+<br>
+
+```{r Regression Plot Medicine,fig.align='center'}
+med_plot
+```
+
+---
+
+All four fields in the humanities display a strong increasing linear trend in number of published works from the years 2000 to 2020 and, starting from 2021 onward, decrease linearly at a higher rate their previous increase. 
+
+Medicine too displays a strong increasing linear trend from the years 2000 to 2020 and starts to decrease starting from 2021 onward but at a rate much lower than its previous increase. 
+
+The following table reports the adjusted $\small r^2$ values for each segmented regression.
+
+```{r}
+r_hist <- round(summary(segmented_ols_hist)$adj.r.squared,4)
+r_philo <- round(summary(segmented_ols_philo)$adj.r.squared,4)
+r_art <- round(summary(segmented_ols_art)$adj.r.squared,4)
+r_lit <- round(summary(segmented_ols_lit)$adj.r.squared,4)
+r_med <- round(summary(segmented_ols_med)$adj.r.squared,4)
+
+r_table <- data.frame(names=c("History","Philosophy","Art","Literature","Medicine"),r=c(r_hist,r_philo,r_art,r_lit,r_med))
+
+gt(r_table,rowname_col="names")|> cols_label(r=html("Adj. r<sup>2</sup>")) |> tab_style(style = cell_text(align="center",weight = "bold"), locations=cells_column_labels())
+
+```
+
+---
+
+The high adjusted $r^2$ values ($r^2>0.9)$ indicate that a large proportion of variation in the number of published works each year was explained by the segmented regression models constructed. 
+
+To test the significance of the supposed structural break point at $\small t=20$, Chow's test must be used. 
+
+## Chow's Test 
+
+---
+
+Chow's test is a econometric procedure typically to test the significance of a known structural break point in time series data, or a specific time when the linear regression parameters are expected to change substantially, such as the onset of the COVID-19 pandemic in 2020. Chow's test requires the data is split into two groups---data prior to the hypothesized structural break point (years 2000 to 2020) and after it (years 2021 to 2024). The following null and alternative hypotheses are tested:
+
+- $H_0$: There is no a structural break point in the data and a pooled regression (one that does not split the data into two groups) fits the data sufficiently well.
+
+- $H_A$: There is a structural break point in the data. Regression parameters differ significantly between groups and two separate regressions constructed on each group provides a better fit to the data than a singular pooled regression. 
+
+Once the data is grouped, three models are constructed:
+
+1. A null model using data from both groups and no presumed structural breakpoint
+
+2. Two segmented regression models separately constructed from the data in each group
+
+The test statistic $\small C$ for Chow's test is calculated as follows: 
+
+---
+
+$$C=\frac{(RSS_p-(RSS_1+RSS_2))/k}{(RSS_1+RSS_2)/(N_1+N_2-2k)}$$
+
+- $\small RSS_p$: Sum of squared residuals from the pooled (null) model
+
+- $\small RSS_1,RSS_2$: Sum of square residuals from the segmented regression
+
+- $\small k$: Number of parameters in each regression
+
+- $\small N_1,N_2$: Number of data points used to construct each segmented regression
+
+Where $\small C$ follows an F-distribution with $\small k$ and $\small N_1+N_2-2k$ degrees of freedom. 
+
+---
+
+Using the previously constructed segmented regressions for each field, the following test statistics and p-values are obtained:
+
+```{r}
+chow <- function(data,init_mod,i1,c1,i2,c2){
+  g1 <- filter(data,name<=20)
+  g2 <- filter(data,name>20)
+  i1 <- as.numeric(i1)
+  c1 <- as.numeric(c1)
+  i2 <- as.numeric(i2)
+  c2 <- as.numeric(c2)
+  
+  t_rss <- sum(resid(init_mod)^2)
+  rss_1 <- sum((g1$count - (i1+(g1$name)*(c1)))^2)
+  rss_2 <- sum((g2$count - (i2+(g2$name)*(c2)))^2)
+  ts <- ((t_rss-(rss_1+rss_2))/2)/((rss_1+rss_2)/(nrow(g1)+nrow(g2)-4))
+  p <- pf(ts,df1=2,df2=(nrow(g1)+nrow(g2)-4),lower.tail=FALSE)
+  return(c(ts,p))
+}
+
+hist_result <- chow(history,init_ols_hist,hist_intercept_1,hist_coef_1,hist_intercept_2,hist_coef_2)
+philo_result <- chow(philo,init_ols_philo,philo_intercept_1,philo_coef_1,philo_intercept_2,philo_coef_2)
+art_result <- chow(art,init_ols_art,art_intercept_1,art_coef_1,art_intercept_2,art_coef_2)
+lit_result <- chow(lit,init_ols_lit,lit_intercept_1,lit_coef_1,lit_intercept_2,lit_coef_2)
+med_result <- chow(medicine,init_ols_med,med_intercept_1,med_coef_1,med_intercept_2,med_coef_2)
+
+list_result <- list(hist_result,philo_result,art_result,lit_result,med_result)
+list_result <- lapply(list_result, function(x) sapply(x, function(y) format(y, digits = 4)))
+frame_result <- data.frame(names=c("History","Philosophy","Art","Literature","Medicine"),ts=sapply(list_result,`[`,1),p=sapply(list_result,`[`,2))
+
+gt(frame_result,rowname_col="names")|> cols_label(ts="Test Statistic",p="P Value") |> tab_style(style = cell_text(align="center",weight = "bold"), locations=cells_column_labels())
+
+```
+
+
+
+# Conclusion
+
+# Contribution Statement
+
+# Works Cited
+
+
+
