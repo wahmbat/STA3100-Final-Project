@@ -26,9 +26,11 @@ library(grid)
 
 # Abstract
 
-# Introduction
+---
 
-## Background Information
+
+
+# Introduction
 
 ---
 
@@ -43,7 +45,7 @@ A 2021 study investigated the effect the COVID-19 pandemic had on the production
 Five years after the initial COVID-19 outbreak, we aim to investigate and compare the trends in the number of published works on medicine and humanities-related fields---specifically history, philosophy, art, and literature---before and after the pandemic. We also aim to compare more generally the number of published works in the humanities with those in medicine. Our analysis will highlight any potential difference in research productivity between fields or patterns of decline in research pre and post-pandemic. By doing so, we hope to call attention to the importance of the humanities and, more broadly, research in academia.
 
 
-# Data & Preliminary Analysis
+# Data & Exploratory Analysis
 
 ---
 
@@ -67,7 +69,7 @@ ggplot(all_topics,aes(x=name,y=count,color=topic)) + geom_point() + labs(title="
 
 ---
 
-It is clear from the scatterplot above that all four humanities-related fields---history, philosophy, art, and literature---display an increasing trend in number of published works from 2000 to 2020 and a decreasing trend thereafter. 
+It is clear from the scatterplot above that all four humanities-related fields---history, philosophy, art, and literature---display an increasing trend in number of published works from 2000 to 2020 and a decreasing trend thereafter.
 
 ---
 
@@ -80,7 +82,7 @@ grid.arrange(pre2020,post2020)
 
 ---
 
-However, medicine is distinct as it displays a clear upward trend in the number of published works from 2000 to 2020 but does not exhibit an immediately apparent pattern thereafter. Additionally, the number of medicine-related works spikes in 2020, presumably in response to the emerging pandemic. 
+However, medicine is distinct as it displays a clear upward trend in the number of published works from 2000 to 2020 but does not exhibit an immediately apparent pattern thereafter. Additionally, the number of medicine-related works spikes in 2020, presumably due to the increased medical research conducted to address the emerging pandemic. 
 
 ---
 
@@ -120,7 +122,7 @@ med_2019 <- round(mean(medicine$count))
 diff_2019 <- format(med_2019-hum_2019,scientific=FALSE)
 ```
 
-The average number of medicine-related published works from 2000 to 2024 exceeds the average for the four humanities-related fields by `r diff_2024`. This is true even for years prior to 2020, a difference of `r diff_2019`, indicating that medicine was a consistently more productive topic of research the humanities even prior to the pandemic. 
+The average annual number of medicine-related published works exceeds the average annual number of published works across all four humanities-related fields aggregated together from 2000 to 2024 by `r diff_2024`. This is true even for years prior to 2020, with a difference of `r diff_2019`, indicating that medicine was a consistently more productive field of research than those in the humanities even prior to the pandemic. 
 
 Additionally, the average number published works from 2000 to 2024 varies much more between medicine the humanities than between the humanities fields themselves. 
 
@@ -186,7 +188,7 @@ Our primary analysis will consist of two procedures:
 
 1. Conduct an interrupted time-series (ITS) analysis on the number of published works before and after the onset of the COVID-19 pandemic in 2020 for each of the five research fields---history, philosophy, art, literature, and medicine---using a segmented linear regression model.
 
-2. Perform Chow's Test to evaluate whether the presumed structural break point---the COVID-19 pandemic in 2020---corresponds to a statistically significant shift in the parameters of the previously constructed segmented regression model. 
+2. Perform Chow's Test to evaluate whether the COVID-19 pandemic in 2020 corresponds to a statistically significant shift in the parameters of the previously constructed segmented regression model. 
 
 ## ITS Analysis
 
@@ -349,9 +351,9 @@ med_plot
 
 ---
 
-All four fields in the humanities display a strong increasing linear trend in number of published works from the years 2000 to 2020 and, starting from 2021 onward, decrease linearly at a higher rate their previous increase. 
+All four fields in the humanities display a strong increasing linear trend in number of published works from the years 2000 to 2020 and, starting from 2021 onward, decrease linearly at a rate higher than their previous increase. 
 
-Medicine too displays a strong increasing linear trend from the years 2000 to 2020 and starts to decrease starting from 2021 onward but at a rate much lower than its previous increase. 
+Medicine too displays a strong increasing linear trend from the years 2000 to 2020 and starts to decrease starting from 2021 onward but at a rate much lower than its previous increase.
 
 The following table reports the adjusted $\small r^2$ values for each segmented regression.
 
@@ -370,7 +372,7 @@ gt(r_table,rowname_col="names")|> cols_label(r=html("Adj. r<sup>2</sup>")) |> ta
 
 ---
 
-The high adjusted $r^2$ values ($r^2>0.9)$ indicate that a large proportion of variation in the number of published works each year was explained by the segmented regression models constructed. 
+The high adjusted $\small r^2$ values ($\small r^2>0.9)$ indicate that a large proportion of variation in the number of published works each year was explained by the segmented regression models constructed. 
 
 To test the significance of the supposed structural break point at $\small t=20$, Chow's test must be used. 
 
@@ -378,7 +380,7 @@ To test the significance of the supposed structural break point at $\small t=20$
 
 ---
 
-Chow's test is a econometric procedure typically to test the significance of a known structural break point in time series data, or a specific time when the linear regression parameters are expected to change substantially, such as the onset of the COVID-19 pandemic in 2020. Chow's test requires the data is split into two groups---data prior to the hypothesized structural break point (years 2000 to 2020) and after it (years 2021 to 2024). The following null and alternative hypotheses are tested:
+Chow's test is a econometric procedure typically to test the significance of a known structural break point in time series data, or a specific time when the linear regression parameters are expected to change substantially, such as the onset of the COVID-19 pandemic in 2020 @statologyWhatChow. Chow's test requires the data is split into two groups---data prior to the hypothesized structural break point (years 2000 to 2020) and after it (years 2021 to 2024). The following null and alternative hypotheses are tested:
 
 - $H_0$: There is no a structural break point in the data and a pooled regression (one that does not split the data into two groups) fits the data sufficiently well.
 
@@ -410,7 +412,7 @@ Where $\small C$ follows an F-distribution with $\small k$ and $\small N_1+N_2-2
 
 Using the previously constructed segmented regressions for each field, the following test statistics and p-values are obtained:
 
-```{r}
+```{r Chow Test Results}
 chow <- function(data,init_mod,i1,c1,i2,c2){
   g1 <- filter(data,name<=20)
   g2 <- filter(data,name>20)
@@ -433,21 +435,55 @@ art_result <- chow(art,init_ols_art,art_intercept_1,art_coef_1,art_intercept_2,a
 lit_result <- chow(lit,init_ols_lit,lit_intercept_1,lit_coef_1,lit_intercept_2,lit_coef_2)
 med_result <- chow(medicine,init_ols_med,med_intercept_1,med_coef_1,med_intercept_2,med_coef_2)
 
+
 list_result <- list(hist_result,philo_result,art_result,lit_result,med_result)
-list_result <- lapply(list_result, function(x) sapply(x, function(y) format(y, digits = 4)))
-frame_result <- data.frame(names=c("History","Philosophy","Art","Literature","Medicine"),ts=sapply(list_result,`[`,1),p=sapply(list_result,`[`,2))
+list_result <- lapply(list_result,function(x){ 
+  x[1]<-round(x[1],digits=2) 
+x})
+frame_result <- data.frame(names=c("History","Philosophy","Art","Literature","Medicine"),ts=sapply(list_result,`[`,1),p=c("< 0.0001","< 0.0001","< 0.0001","< 0.001","< 0.0001"))
 
 gt(frame_result,rowname_col="names")|> cols_label(ts="Test Statistic",p="P Value") |> tab_style(style = cell_text(align="center",weight = "bold"), locations=cells_column_labels())
-
 ```
 
+---
 
+The results of Chow's Test for all five fields are statistically significant at all commonly used alpha level. This indicates the presence of a structural break point in the data at the year 2020. Therefore, the number of published works in each field should be modeled using a segmented regression, with separate linear trends for $\small t\leq20$ and $\small t>20$, rather than a single continuous linear regression. 
 
 # Conclusion
 
+---
+
+Our analysis conducted on the number of published works in four humanities-related fields---history, philosophy, art, and literature---as well as medicine on OpenAlex from 2000 to 2024 revealed a few key observations and trends:
+
+1. All five fields experienced an increase in the number of published works from 2000 to 2020 and an abrupt decrease afterwards, presumably as a result of the COVID-19 pandemic. 
+
+2. From 2021 onward, medicine experienced a relatively smaller decline in the number of published works compared to the four humanities-related fields. 
+
+3. Medicine was the most productive field of research among the five both before and after the pandemic, producing more published works per year, on average, than all four humanities-related fields.
+
+4. The number of published works from 2000 to 2024 is better modeled using a segmented regression with a break point at the year 2020 than a singular continuous linear regression for all five fields. 
+
+From the data, it is clear that humanities-related fields receive consistently less research attention and are now experiencing a more pronounced decline in annual number of published works compared to medicine post-pandemic. 
+
+These findings call attention to the need to increase support and funding for research in the humanities, and we hope they can be used to inform such efforts. 
+
+## Study Limitations
+
+---
+
+Our analysis is only based on the number of works published on OpenAlex each year which limits the scope of our findings since it is plausible different trends are observed on other databases such as Google Scholar.
+
+Additionally, our findings cannot establish that the COVID-19 pandemic directly caused the abrupt shift in publication trends observed in 2020, as external factors were not controlled for. Chow's Test only establishes the statistical significance of the structural break point at 2020, but it does not provide any insight as to its cause. The observed decrease in the number of published works after 2020 may be linked to a multitude of notable events that occurred that year, such as the COVID-19 pandemic, the historic U.S. presidential election, or widespread protests in America.
+
 # Contribution Statement
 
+---
+
+
+
 # Works Cited
+
+---
 
 
 
