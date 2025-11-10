@@ -1,6 +1,6 @@
 ---
 title: "STA3100 Final Project Report"
-author: "Anjali Tomerlin and Elena Pedeton"
+author: "Anjali Tomerlin and Elena Peden"
 bibliography: final_project_ref.bib
 link-citations: yes
 csl: ieee.csl
@@ -36,7 +36,7 @@ library(grid)
 
 Immediately following the advent of the COVID-19 pandemic in 2020, the focus of much academic research and funding pivoted towards the medicine and public health sectors. However, the long-term impact of this shift on the prevalence of research in other areas, particularly the humanities, has been overlooked. Our study is motivated by the lack of available information and analysis on this topic, despite it being one of great importance. Research in the humanities, though often disregarded by those in STEM-related fields, is necessary as it fosters critical thinking, empathy, and a greater understanding of human society and culture.  
 
-A 2021 study investigated the effect the COVID-19 pandemic had on the production medicine research and found an estimated 18% decrease in non-COVID-19 related published works @biomedcentralImpactCOVID19. However, no prior studies have conducted a comprehensive review of the pandemic's effect on the production of research in the humanities.
+A 2021 study investigated the effect the COVID-19 pandemic had on the production medicine research and found an estimated 18% decrease in non-COVID-19 related published works. @biomedcentralImpactCOVID19 However, no prior studies have conducted a comprehensive review of the pandemic's effect on the production of research in the humanities.
 
 ## Objectives
 
@@ -49,9 +49,9 @@ Five years after the initial COVID-19 outbreak, we aim to investigate and compar
 
 ---
 
-The data sets used in our project are sourced from OpenAlex, an open-source catalog of scholarly works. OpenAlex categorizes works using a hierarchical structure known as *concepts*. There are 19 root-level concepts, which represent broad categories of research such as Engineering and History, and 6 branching layers of concepts, each increasing in topic specificity @openalexConceptsOpenAlex. 
+The data sets used in our project are sourced from OpenAlex, an open-source catalog of scholarly works. OpenAlex categorizes works using a hierarchical structure known as *concepts*. There are 19 root-level concepts, which represent broad categories of research such as Engineering and History, and 6 branching layers of concepts, each increasing in topic specificity. @openalexConceptsOpenAlex
 
-We utilize OpenAlex's data sets for the number of published works whose concept classifiers are history @openalexOpenAlexhistory, philosophy @openalexOpenAlexphilo, art @openalexOpenAlexart, literature @openalexOpenAlexlit, and medicine @openalexOpenAlexmedicine. All of these fall into level 0 of the concept hierarchy, the most broad category, except for literature, which is slightly more specific at level 1. Although each of these OpenAlex data sets have values dating back to 1826, our analysis only considers those from years 2000 to 2024 for relevancy. 
+We utilize OpenAlex's data sets for the number of published works whose concept classifiers are history, @openalexOpenAlexhistory philosophy, @openalexOpenAlexphilo art, @openalexOpenAlexart literature, @openalexOpenAlexlit and medicine. @openalexOpenAlexmedicine All of these fall into level 0 of the concept hierarchy, the most broad category, except for literature, which is slightly more specific at level 1. Although each of these OpenAlex data sets have values dating back to 1826, our analysis only considers those from years 2000 to 2024 for relevancy. 
 
 ## Trend Evaluation
 
@@ -328,7 +328,6 @@ med_coef_2 <- format(round(coefficients(segmented_ols_med)[[3]]+coefficients(seg
 med_intercept_2 <- round(coefficients(segmented_ols_med)[[1]]-coefficients(segmented_ols_med)[[3]]*20)
 med_intercept_2 <- format(med_intercept_2,scientific=FALSE)
 ```
-<br>
 
 ```{r Regression Table}
 reg_table <- data.frame(a1=c(hist_intercept_1,philo_intercept_1,art_intercept_1,lit_intercept_1,med_intercept_1),b1=c(hist_coef_1,philo_coef_1,art_coef_1,lit_coef_1,med_coef_1),a2=c(hist_intercept_2,philo_intercept_2,art_intercept_2,lit_intercept_2,med_intercept_2),b2=c(hist_coef_2,philo_coef_2,art_coef_2,lit_coef_2,med_coef_2),names=c("History","Philosophy","Art","Literature","Medicine"))
@@ -355,7 +354,8 @@ All four fields in the humanities display a strong increasing linear trend in nu
 
 Medicine too displays a strong increasing linear trend from the years 2000 to 2020 and starts to decrease starting from 2021 onward but at a rate much lower than its previous increase.
 
-The following table reports the adjusted $\small r^2$ values for each segmented regression.
+The following table reports the adjusted $\small r^2$ values for each segmented regression:
+
 
 ```{r}
 r_hist <- round(summary(segmented_ols_hist)$adj.r.squared,4)
@@ -380,7 +380,7 @@ To test the significance of the supposed structural break point at $\small t=20$
 
 ---
 
-Chow's test is a econometric procedure typically to test the significance of a known structural break point in time series data, or a specific time when the linear regression parameters are expected to change substantially, such as the onset of the COVID-19 pandemic in 2020 @statologyWhatChow. Chow's test requires the data is split into two groups---data prior to the hypothesized structural break point (years 2000 to 2020) and after it (years 2021 to 2024). The following null and alternative hypotheses are tested:
+Chow's test is a econometric procedure typically to test the significance of a known structural break point in time series data, or a specific time when the linear regression parameters are expected to change substantially, such as the onset of the COVID-19 pandemic in 2020. @statologyWhatChow Chow's test requires the data is split into two groups---data prior to the hypothesized structural break point (years 2000 to 2020) and after it (years 2021 to 2024). The following null and alternative hypotheses are tested:
 
 - $H_0$: There is no a structural break point in the data and a pooled regression (one that does not split the data into two groups) fits the data sufficiently well.
 
@@ -412,6 +412,7 @@ Where $\small C$ follows an F-distribution with $\small k$ and $\small N_1+N_2-2
 
 Using the previously constructed segmented regressions for each field, the following test statistics and p-values are obtained:
 
+
 ```{r Chow Test Results}
 chow <- function(data,init_mod,i1,c1,i2,c2){
   g1 <- filter(data,name<=20)
@@ -440,7 +441,7 @@ list_result <- list(hist_result,philo_result,art_result,lit_result,med_result)
 list_result <- lapply(list_result,function(x){ 
   x[1]<-round(x[1],digits=2) 
 x})
-frame_result <- data.frame(names=c("History","Philosophy","Art","Literature","Medicine"),ts=sapply(list_result,`[`,1),p=c("< 0.0001","< 0.0001","< 0.0001","< 0.001","< 0.0001"))
+frame_result <- data.frame(names=c("History","Philosophy","Art","Literature","Medicine"),ts=sapply(list_result,`[`,1),p=c("< 0.001","< 0.001","< 0.001","< 0.001","< 0.001"))
 
 gt(frame_result,rowname_col="names")|> cols_label(ts="Test Statistic",p="P Value") |> tab_style(style = cell_text(align="center",weight = "bold"), locations=cells_column_labels())
 ```
@@ -453,7 +454,7 @@ The results of Chow's Test for all five fields are statistically significant at 
 
 ---
 
-Our analysis conducted on the number of published works in four humanities-related fields---history, philosophy, art, and literature---as well as medicine on OpenAlex from 2000 to 2024 revealed a few key observations and trends:
+We analyzed the number of published works the humanities and medicine on OpenAlex from 2000 to 2024. To accurately represent the broadness of humanities we considered data from four different fields: history, philosophy, art, and literature. Comparing this data to that from medicine revealed a few key observations and trends:
 
 1. All five fields experienced an increase in the number of published works from 2000 to 2020 and an abrupt decrease afterwards, presumably as a result of the COVID-19 pandemic. 
 
@@ -465,7 +466,9 @@ Our analysis conducted on the number of published works in four humanities-relat
 
 From the data, it is clear that humanities-related fields receive consistently less research attention and are now experiencing a more pronounced decline in annual number of published works compared to medicine post-pandemic. 
 
-These findings call attention to the need to increase support and funding for research in the humanities, and we hope they can be used to inform such efforts. 
+Our findings cannot establish that the COVID-19 pandemic directly caused the abrupt decrease in the number of humanities-related published works observed after 2020, as external factors were not controlled for. Chow's Test only establishes the statistical significance of the structural break point at 2020, but it does not provide any insight as to its cause. The observed decrease in the number of published works after 2020 may be linked to a multitude of notable events that occurred that year, such as the COVID-19 pandemic, widespread economic struggle as a result of the pandemic, the historic U.S. presidential election, or protests in America. Additionally, the slight decrease in the number of medical-related published works observed after 2020 could be linked to the reduced need for studying the SARS-CoV-2 virus following the development of its vaccine. However, these hypotheses as to the abrupt change in published work trends are unable to be statistically verified.  
+
+Given the current continuing decrease in the number of published works despite the resolution of COVID-19 and other possible causes previously discussed, there is an evident need to increase support and funding for research in the humanities. We hope our findings can be used to inform such efforts. 
 
 ## Study Limitations
 
@@ -473,13 +476,9 @@ These findings call attention to the need to increase support and funding for re
 
 Our analysis is only based on the number of works published on OpenAlex each year which limits the scope of our findings since it is plausible different trends are observed on other databases such as Google Scholar.
 
-Additionally, our findings cannot establish that the COVID-19 pandemic directly caused the abrupt shift in publication trends observed in 2020, as external factors were not controlled for. Chow's Test only establishes the statistical significance of the structural break point at 2020, but it does not provide any insight as to its cause. The observed decrease in the number of published works after 2020 may be linked to a multitude of notable events that occurred that year, such as the COVID-19 pandemic, the historic U.S. presidential election, or widespread protests in America.
-
 # Contribution Statement
 
 ---
-
-
 
 # Works Cited
 
