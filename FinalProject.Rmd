@@ -36,13 +36,13 @@ library(grid)
 
 Immediately following the advent of the COVID-19 pandemic in 2020, the focus of much academic research and funding pivoted towards the medicine and public health sectors. However, the long-term impact of this shift on the prevalence of research in other areas, particularly the humanities, has been overlooked. Our study is motivated by the lack of available information and analysis on this topic, despite it being one of great importance. Research in the humanities, though often disregarded by those in STEM-related fields, is necessary as it fosters critical thinking, empathy, and a greater understanding of human society and culture.  
 
-A 2021 study investigated the effect the COVID-19 pandemic had on the production medicine research and found an estimated 18% decrease in non-COVID-19 related published works. @biomedcentralImpactCOVID19 However, no prior studies have conducted a comprehensive review of the pandemic's effect on the production of research in the humanities.
+A 2021 study investigated the effect of COVID-19 pandemic on the production medicine research and found an estimated 18% decrease in non-COVID-19 related published works. @biomedcentralImpactCOVID19 However, no prior studies have conducted a comprehensive review of the pandemic's effect on the production of research in the humanities.
 
 ## Objectives
 
 ---
 
-Five years after the initial COVID-19 outbreak, we aim to investigate and compare the trends in the number of published works on medicine and humanities-related fields---specifically history, philosophy, art, and literature---before and after the pandemic. We also aim to compare more generally the number of published works in the humanities with those in medicine. Our analysis will highlight any potential difference in research productivity between fields or patterns of decline in research pre and post-pandemic. By doing so, we hope to call attention to the importance of the humanities and, more broadly, research in academia.
+Five years after the initial COVID-19 outbreak, we aim to investigate and compare the trends in the annual number of published works in medicine and fields in the humanities---specifically history, philosophy, art, and literature---before and after the pandemic. We also aim to compare more generally the number of published works in the humanities with those in medicine. Our analysis will highlight any potential difference in research productivity between medicine and the humanities or general patterns of decline in research pre and post-pandemic. By doing so, we hope to call attention to the importance of the humanities and, more broadly, research in academia.
 
 
 # Data & Exploratory Analysis
@@ -51,7 +51,7 @@ Five years after the initial COVID-19 outbreak, we aim to investigate and compar
 
 The data sets used in our project are sourced from OpenAlex, an open-source catalog of scholarly works. OpenAlex categorizes works using a hierarchical structure known as *concepts*. There are 19 root-level concepts, which represent broad categories of research such as Engineering and History, and 6 branching layers of concepts, each increasing in topic specificity. @openalexConceptsOpenAlex
 
-We utilize OpenAlex's data sets for the number of published works whose concept classifiers are history, @openalexOpenAlexhistory philosophy, @openalexOpenAlexphilo art, @openalexOpenAlexart literature, @openalexOpenAlexlit and medicine. @openalexOpenAlexmedicine All of these fall into level 0 of the concept hierarchy, the most broad category, except for literature, which is slightly more specific at level 1. Although each of these OpenAlex data sets have values dating back to 1826, our analysis only considers those from years 2000 to 2024 for relevancy. 
+We utilize OpenAlex's data sets for the annual number of published works whose concept classifiers are history, @openalexOpenAlexhistory philosophy, @openalexOpenAlexphilo art, @openalexOpenAlexart literature, @openalexOpenAlexlit and medicine. @openalexOpenAlexmedicine All of these fall into level 0 of the concept hierarchy, the most broad category, except for literature, which is slightly more specific at level 1. Although each of these OpenAlex data sets have values dating back to 1826, our analysis only considers those from years 2000 to 2024 for relevancy. 
 
 ## Trend Evaluation
 
@@ -64,32 +64,32 @@ art <- read_csv("./art_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Ar
 lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Literature"))
 medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Medicine"))
 all_topics <- bind_rows(history,philo,art,lit,medicine) |> filter(name <=2024, name >= 2000)
-ggplot(all_topics,aes(x=name,y=count,color=topic)) + geom_point() + labs(title="Number of Published Works by Field on OpenAlex (2000-2024)",x="Year",y="Number of Published Works",color="Field")
+ggplot(all_topics,aes(x=name,y=count,color=topic)) + geom_point() + labs(title="Annual Number of Published Works by Field (2000-2024)",x="Year",y="Number of Published Works",color="Field")+ theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ---
 
-It is clear from the scatterplot above that all four humanities-related fields---history, philosophy, art, and literature---display an increasing trend in number of published works from 2000 to 2020 and a decreasing trend thereafter.
+It is clear from the scatterplot above that all four fields in the humanities---history, philosophy, art, and literature---display an increasing trend in number of published works from 2000 to 2020 and a decreasing trend thereafter.
 
 ---
 
 ```{r Literature Pre/Post 2020 Plots,fig.align='center'}
 lit <- read_csv("./literature_counts.csv",show_col_types = FALSE)
-pre2020 <- ggplot(filter(lit,name<2020,name>=2000),aes(x=name,y=count)) + geom_point() + labs(title="Number of Literature-Related Published Works on OpenAlex (2000-2019)",x="Year",y="Number of Published Works")
-post2020 <- ggplot(filter(lit,name>=2020,name<=2024),aes(x=name,y=count)) + geom_point() + labs(title="Number of Literature-Related Published Works on OpenAlex (2020-2024)",x="Year",y="Number of Published Works")
+pre2020 <- ggplot(filter(lit,name<2020,name>=2000),aes(x=name,y=count)) + geom_point() + labs(title="Annual Number of Literature-Related Published Works (2000-2019)",x="Year",y="Number of Published Works")+ theme(plot.title = element_text(hjust = 0.5))
+post2020 <- ggplot(filter(lit,name>=2020,name<=2024),aes(x=name,y=count)) + geom_point() + labs(title="Annual Number of Literature-Related Published Works (2020-2024)",x="Year",y="Number of Published Works")+ theme(plot.title = element_text(hjust = 0.5))
 grid.arrange(pre2020,post2020)
 ```
 
 ---
 
-However, medicine is distinct as it displays a clear upward trend in the number of published works from 2000 to 2020 but does not exhibit an immediately apparent pattern thereafter. Additionally, the number of medicine-related works spikes in 2020, presumably due to the increased medical research conducted to address the emerging pandemic. 
+However, medicine is distinct as it displays a clear upward trend in the annual number of published works from 2000 to 2020 but does not exhibit an immediately apparent pattern thereafter. Additionally, the annual number of medicine-related works spikes in 2020, presumably due to the increased medical research conducted to address the emerging pandemic. 
 
 ---
 
 ```{r Medicine Pre/Post 2020 Plots,fig.align='center'}
 medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE)
-pre2020 <- ggplot(filter(medicine,name<2020,name>=2000),aes(x=name,y=count)) + geom_point() + labs(title="Number of Medicine-Related Published Works on OpenAlex (2000-2019)",x="Year",y="Number of Published Works")
-post2020 <- ggplot(filter(medicine,name>=2020,name<=2024),aes(x=name,y=count)) + geom_point() + labs(title="Number of Medicine-Related Published Works on OpenAlex (2020-2024)",x="Year",y="Number of Published Works")
+pre2020 <- ggplot(filter(medicine,name<2020,name>=2000),aes(x=name,y=count)) + geom_point() + labs(title="Annual Number of Medicine-Related Published Works (2000-2019)",x="Year",y="Number of Published Works")+ theme(plot.title = element_text(hjust = 0.5))
+post2020 <- ggplot(filter(medicine,name>=2020,name<=2024),aes(x=name,y=count)) + geom_point() + labs(title="Annual Number of Medicine-Related Published Works (2020-2024)",x="Year",y="Number of Published Works")+ theme(plot.title = element_text(hjust = 0.5))
 grid.arrange(pre2020,post2020)
 ```
 
@@ -122,7 +122,7 @@ med_2019 <- round(mean(medicine$count))
 diff_2019 <- format(med_2019-hum_2019,scientific=FALSE)
 ```
 
-The average annual number of medicine-related published works exceeds the average annual number of published works across all four humanities-related fields aggregated together from 2000 to 2024 by `r diff_2024`. This is true even for years prior to 2020, with a difference of `r diff_2019`, indicating that medicine was a consistently more productive field of research than those in the humanities even prior to the pandemic. 
+The average annual number of medicine-related published works exceeds the average annual number of published works across all four fields in the humanities aggregated together from 2000 to 2024 by `r diff_2024`. This is true even for years prior to 2020, with a difference of `r diff_2019`, indicating that medicine was a consistently more productive field of research than those in the humanities even prior to the pandemic. 
 
 Additionally, the average number published works from 2000 to 2024 varies much more between medicine the humanities than between the humanities fields themselves. 
 
@@ -146,12 +146,12 @@ colnames(diff_table) <- c("field1","field2","diff")
 
 diff_table <- mutate(diff_table,i=match(field1,mean_df$group),j=match(field2,mean_df$group)) |> filter(i>j)
 
-ggplot(diff_table,aes(x=field1,y=field2,fill=diff)) + geom_tile(color="white") + geom_text(aes(label=round(diff)),color="black",size=4) + scale_fill_gradient(low="lightblue",high="mediumpurple",name="Mean Difference") + labs(x=NULL,y=NULL,title="Pairwise Mean Differences in Number of Published Works from 2000 to 2024")
+ggplot(diff_table,aes(x=field1,y=field2,fill=diff)) + geom_tile(color="white") + geom_text(aes(label=round(diff)),color="black",size=4) + scale_fill_gradient(low="lightblue",high="mediumpurple",name="Mean Difference") + labs(x=NULL,y=NULL,title="Pairwise Mean Differences in Annual Number of Published Works (2000-2024)")+ theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ---
 
-The variation in number of published works from 2000 to 2024 is much higher for medicine than the humanities-related fields, reflecting its steeper upward trend in publication output over time. 
+The variation in annual number of published works from 2000 to 2024 is much higher for medicine than the four fields in the humanities, reflecting its steeper upward trend in publication output over time. 
 
 ---
 
@@ -177,7 +177,7 @@ lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |> mutate(topi
 medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> mutate(topic=c("Medicine"))
 all_topics <- bind_rows(history,philo,art,lit,medicine) |> filter(name <=2024, name >= 2000)
 
-ggplot(all_topics,aes(x=topic,y=count)) + geom_boxplot() + labs(title="Number of Published Works from 2000 to 2024 Across Fields",y="Number of Published Works",x=NULL)
+ggplot(all_topics,aes(x=topic,y=count)) + geom_boxplot() + labs(title="Annual Number of Published Works Across Fields (2000-2024)",y="Number of Published Works",x=NULL)+ theme(plot.title = element_text(hjust = 0.5))
 ```
 
 # Analysis and Results
@@ -186,17 +186,17 @@ ggplot(all_topics,aes(x=topic,y=count)) + geom_boxplot() + labs(title="Number of
 
 Our primary analysis will consist of two procedures:
 
-1. Conduct an interrupted time-series (ITS) analysis on the number of published works before and after the onset of the COVID-19 pandemic in 2020 for each of the five research fields---history, philosophy, art, literature, and medicine---using a segmented linear regression model.
+1. Conduct an interrupted time-series (ITS) analysis on the annual number of published works before and after the onset of the COVID-19 pandemic in 2020 for each of the five research fields---history, philosophy, art, literature, and medicine---using multiple segmented linear regression models.
 
-2. Perform Chow's Test to evaluate whether the COVID-19 pandemic in 2020 corresponds to a statistically significant shift in the parameters of the previously constructed segmented regression model. 
+2. Perform Chow's Test to evaluate whether the year 2020, marking first outbreak of the COVID-19 pandemic, corresponds to a statistically significant shift in the parameters of the previously constructed segmented linear regressions. 
 
 ## ITS Analysis
 
 ---
 
-The data for each of the five research fields will be split into two groups, data prior to and at the start of the COVID-19 pandemic (years 2000 to 2020) and after the pandemic's initial outbreak (years 2021 to 2024). Five segmented linear regression models will be constructed each with a singular structural break point at the year 2020. This will result in five separate segmented linear regression functions for each field with the independent variable $\small t$, measured in years since 2000, and dependent variable $\small \hat{y}(t)$, the estimated number of works published in that field at time $\small t$. 
+The data for each of the five research fields will be split into two groups, data prior to and at the start of the COVID-19 pandemic (years 2000 to 2020) and after the pandemic's initial outbreak (years 2021 to 2024). Five segmented linear regressions will be constructed each with a singular structural break point at the year 2020. This will result in five separate piecewise functions for each field with the independent variable $\small t$, measured in years since 2000, and dependent variable $\small \hat{y}(t)$, the estimated number of works published in that field at time $\small t$. 
 
-The segmented linear regression model constructs a linear regression using the method of ordinary least squares for points before and after a number of specified break points while ensuring continuity between regression segments at the break point. This that the two separate linear regression functions which are constructed for $\small t\leq20$ and $\small t>20$ meet at $\small t=20$ exactly. A segmented linear regression model for the number of of published works $\small Y_i$ at a time $\small t_i$, measured in years since 2000 is formulated as follows:
+The segmented linear regression model constructs a linear regression using the method of ordinary least squares for points before and after a number of specified break points while ensuring continuity between regression segments at the break point. This ensures that the two separate linear regression functions which are constructed for $\small t\leq20$ and $\small t>20$ meet at $\small t=20$ exactly. A segmented linear regression model for the number of of works $\small Y_i$ published at a time $\small t_i$, measured in years since 2000 is formulated as follows:
 
 ---
 
@@ -210,7 +210,7 @@ $$Y_i=\beta_0+\beta_1t_i+\beta_2(t_i-20)^++\epsilon_i$$
 
 - $\small \beta_2$: Change in regression slope for second linear segment compared to the first
 
-- $\small (t_i-20)^+$: Piecewise function where $\small (t_i-20)^+=t_i-20$ if $\small t_i>20$ and $\small (t_i-20)^+=0$ if $\small t_i\leq20$
+- $\small (t_i-20)^+$: Piecewise function where $\small (t_i-20)^+=0$ if $\small t_i\leq20$ and $\small (t_i-20)^+=t_i-20$ if $\small t_i>20$
 
 - $\small \epsilon_i$: Error term
 
@@ -223,7 +223,7 @@ Alternatively, the model can be formulated as the following piecewise function:
 $$Y_i=\begin{cases} \beta_0+\beta_1t_i+\epsilon_i &\text{if } t \leq 20 \\ (\beta_0-20\beta_2)+(\beta_1+\beta_2)t_i+\epsilon_i &\text{if } t > 20 \end{cases}$$
 <br>
 
-We will utilize this formulation going forward. From this model, the following regression with estimated coefficients can be calculated for each fields:
+We will utilize this formulation going forward. From this model, the following regression with estimated coefficients can be calculated for each field:
 
 ---
 
@@ -242,7 +242,7 @@ $$\hat{y}(t)=\begin{cases} a_1 + b_1t& \text{if } t \leq 20 \\ a_2 + b_2t & \tex
 
 ---
 
-The following table reports the regression parameter estimates for each of the five constructed segmented linear regression models:
+The following table reports the regression parameter estimates for each of the five constructed segmented linear regressions:
 
 ```{r Segmented Regression History Plot}
 history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
@@ -318,7 +318,7 @@ medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> filter(n
 init_ols_med <- lm(count ~ name,data=medicine)
 segmented_ols_med <- segmented(init_ols_med,seg.Z= ~name,psi=list(name=20),control = seg.control(it.max = 0))
 medicine$pred <- predict(segmented_ols_med)
-med_plot <- ggplot(medicine,aes(x=name,y=count)) + geom_point() + geom_line(aes(y=pred)) + labs(title="Segmented Regression for Number of Medicine-Related Works Versus Year",x="Years Since 2000",y="Number of Published Works")
+med_plot <- ggplot(medicine,aes(x=name,y=count)) + geom_point() + geom_line(aes(y=pred)) + labs(title="Segmented Regression for Annual Number of Medicine-Related Works",x="Years Since 2000",y="Number of Published Works")+ theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ```{r Segmented Regression Med Eq}
@@ -339,7 +339,7 @@ gt(reg_table,rowname_col="names")|> cols_label(a1=html("a<sub>1</sub>"),b1=html(
 ---
 
 ```{r Regression Plots Humanities,fig.align='center'}
-grid.arrange(hist_plot,philo_plot,art_plot,lit_plot,top=textGrob("Number of Humanities-Related Published Works Versus Years Since 2000",gp=gpar(fontsize = 14)),padding = unit(1, "lines"))
+grid.arrange(hist_plot,philo_plot,art_plot,lit_plot,top=textGrob("Segmented Regressions for Annual Number of Humanities-Related Works",gp=gpar(fontsize = 14)),padding = unit(1, "lines"))
 ```
 
 <br>
@@ -350,14 +350,60 @@ med_plot
 
 ---
 
-All four fields in the humanities display a strong increasing linear trend in number of published works from the years 2000 to 2020 and, starting from 2021 onward, decrease linearly at a rate higher than their previous increase. 
+All four fields in the humanities display a strong increasing linear trend in annual number of published works from the years 2000 to 2020 and, starting from 2021 onward, decrease linearly at a rate higher than their previous increase. 
 
-Medicine too displays a strong increasing linear trend from the years 2000 to 2020 and starts to decrease starting from 2021 onward but at a rate much lower than its previous increase.
+Medicine also displays a strong increasing linear trend from the years 2000 to 2020 and starts to decrease starting from 2021 onward but at a rate much lower than its previous increase.
+
+## Extrapolating Trends
+
+---
+
+The following table reports the predicted number of published works in each field in 2027, as estimated from the segmented linear regressions constructed, along with the corresponding percentage decrease compared to the observed 2020 values: 
+
+```{r Extrapolation}
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> mutate(name=name-2000)
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> mutate(name=name-2000)
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |>  mutate(name=name-2000)
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |>  mutate(name=name-2000)
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> mutate(name=name-2000)
+
+new_years <- data.frame(name=c(27),U1.name=c(7))
+hist_pred <- round(predict(segmented_ols_hist,newdata=new_years,type="response"))
+philo_pred <- round(predict(segmented_ols_philo,newdata=new_years,type="response"))
+art_pred <- round(predict(segmented_ols_art,newdata=new_years,type="response"))
+lit_pred <- round(predict(segmented_ols_lit,newdata=new_years,type="response"))
+med_pred <- round(predict(segmented_ols_med,newdata=new_years,type="response"))
+
+hist_20 <- filter(history,name==20)$count
+perc_dec_hist <- round((hist_20-hist_pred[[1]])/(hist_20)*100)
+philo_20 <- filter(philo,name==20)$count
+perc_dec_philo <- round((philo_20-philo_pred[[1]])/(philo_20)*100)
+art_20 <- filter(art,name==20)$count
+perc_dec_art <- round((art_20-art_pred[[1]])/(art_20)*100)
+lit_20 <- filter(lit,name==20)$count
+perc_dec_lit <- round((lit_20-lit_pred[[1]])/(lit_20)*100)
+med_20 <- filter(medicine,name==20)$count
+perc_dec_med <- round((med_20-med_pred[[1]])/(med_20)*100)
+
+pred_df <- bind_rows(hist_pred,philo_pred,art_pred,lit_pred,med_pred) |> mutate(perc_dec=c(perc_dec_hist,perc_dec_philo,perc_dec_art,perc_dec_lit,perc_dec_med),names=c("History","Philosophy","Art","Literature","Medicine")) |> rename(`2027`=`1`)
+
+gt(pred_df,rowname_col="names")|> cols_label(`2027`="Predicted Value",perc_dec="Percentage Decrease") |> tab_style(style = cell_text(align="center",weight = "bold"), locations=cells_column_labels())
+```
+
+<br>
+
+These percentage decreases reveal that medicine experienced, and is projected to experience, a relatively smaller decline in the annual number of published works compared to the four fields in the humanities.
+
+It is important to note that these extrapolated values are tentative estimations made under the strong assumption that the current downward trend in the annual number of published works in each field will continue.
+
+## Assessing Model Fit
+
+---
 
 The following table reports the adjusted $\small r^2$ values for each segmented regression:
 
 
-```{r}
+```{r R Squared Table}
 r_hist <- round(summary(segmented_ols_hist)$adj.r.squared,4)
 r_philo <- round(summary(segmented_ols_philo)$adj.r.squared,4)
 r_art <- round(summary(segmented_ols_art)$adj.r.squared,4)
@@ -372,9 +418,9 @@ gt(r_table,rowname_col="names")|> cols_label(r=html("Adj. r<sup>2</sup>")) |> ta
 
 ---
 
-The high adjusted $\small r^2$ values ($\small r^2>0.9)$ indicate that a large proportion of variation in the number of published works each year was explained by the segmented regression models constructed. 
+The high adjusted $\small r^2$ values ($\small r^2>0.9)$ indicate that a large proportion of variation in the annual number of published works was explained by the segmented linear regressions constructed. This indicates that the segmented regressions for all five fields provided a good fit to the data. 
 
-To test the significance of the supposed structural break point at $\small t=20$, Chow's test must be used. 
+However, to test the significance of the supposed structural break point at $\small t=20$, a procedure known as Chow's test must be used. 
 
 ## Chow's Test 
 
@@ -382,7 +428,7 @@ To test the significance of the supposed structural break point at $\small t=20$
 
 Chow's test is a econometric procedure typically to test the significance of a known structural break point in time series data, or a specific time when the linear regression parameters are expected to change substantially, such as the onset of the COVID-19 pandemic in 2020. @statologyWhatChow Chow's test requires the data is split into two groups---data prior to the hypothesized structural break point (years 2000 to 2020) and after it (years 2021 to 2024). The following null and alternative hypotheses are tested:
 
-- $H_0$: There is no a structural break point in the data and a pooled regression (one that does not split the data into two groups) fits the data sufficiently well.
+- $H_0$: There is not a structural break point in the data and a pooled regression (one that does not split the data into two groups) fits the data sufficiently well.
 
 - $H_A$: There is a structural break point in the data. Regression parameters differ significantly between groups and two separate regressions constructed on each group provides a better fit to the data than a singular pooled regression. 
 
@@ -390,7 +436,7 @@ Once the data is grouped, three models are constructed:
 
 1. A null model using data from both groups and no presumed structural breakpoint
 
-2. Two segmented regression models separately constructed from the data in each group
+2. Two segmented linear regression models separately constructed from the data in each group
 
 The test statistic $\small C$ for Chow's test is calculated as follows: 
 
@@ -400,20 +446,26 @@ $$C=\frac{(RSS_p-(RSS_1+RSS_2))/k}{(RSS_1+RSS_2)/(N_1+N_2-2k)}$$
 
 - $\small RSS_p$: Sum of squared residuals from the pooled (null) model
 
-- $\small RSS_1,RSS_2$: Sum of square residuals from the segmented regression
+- $\small RSS_1,RSS_2$: Sum of square residuals from the segmented linear regression
 
 - $\small k$: Number of parameters in each regression
 
-- $\small N_1,N_2$: Number of data points used to construct each segmented regression
+- $\small N_1,N_2$: Number of data points used to construct each segmented linear regression
 
 Where $\small C$ follows an F-distribution with $\small k$ and $\small N_1+N_2-2k$ degrees of freedom. 
 
 ---
 
-Using the previously constructed segmented regressions for each field, the following test statistics and p-values are obtained:
+Using the previously constructed segmented linear regressions for each field, the following test statistics and p-values are obtained:
 
 
 ```{r Chow Test Results}
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |>  filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |>  filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+
 chow <- function(data,init_mod,i1,c1,i2,c2){
   g1 <- filter(data,name<=20)
   g2 <- filter(data,name>20)
@@ -448,37 +500,44 @@ gt(frame_result,rowname_col="names")|> cols_label(ts="Test Statistic",p="P Value
 
 ---
 
-The results of Chow's Test for all five fields are statistically significant at all commonly used alpha level. This indicates the presence of a structural break point in the data at the year 2020. Therefore, the number of published works in each field should be modeled using a segmented regression, with separate linear trends for $\small t\leq20$ and $\small t>20$, rather than a single continuous linear regression. 
+The results of Chow's Test for all five fields are statistically significant at all commonly used alpha level. This indicates the presence of a structural break point in the data at the year 2020. Therefore, the annual number of published works in each field should be modeled using a segmented regression, with separate linear trends for $\small t\leq20$ and $\small t>20$, rather than a single continuous linear regression. 
 
 # Conclusion
 
 ---
 
-We analyzed the number of published works the humanities and medicine on OpenAlex from 2000 to 2024. To accurately represent the broadness of humanities we considered data from four different fields: history, philosophy, art, and literature. Comparing this data to that from medicine revealed a few key observations and trends:
+We analyzed the annual number of published works the humanities and medicine on OpenAlex from 2000 to 2024. To accurately represent the broadness of humanities we considered data from four different fields: history, philosophy, art, and literature. Comparing this data to that from medicine revealed a few key observations and trends:
 
-1. All five fields experienced an increase in the number of published works from 2000 to 2020 and an abrupt decrease afterwards, presumably as a result of the COVID-19 pandemic. 
+1. All five fields experienced an increase in the annual number of published works from 2000 to 2020 and an abrupt decrease afterwards, presumably as a result of the COVID-19 pandemic. 
 
-2. From 2021 onward, medicine experienced a relatively smaller decline in the number of published works compared to the four humanities-related fields. 
+2. From 2021 to 2024, medicine experienced a relatively smaller decline in the annual number of published works compared to the four fields in the humanities. This trend is projected to continue in future years. 
 
-3. Medicine was the most productive field of research among the five both before and after the pandemic, producing more published works per year, on average, than all four humanities-related fields.
+3. Medicine was the most productive field of research among the five both before and after the pandemic, producing more published works per year, on average, than all four fields in the humanities.
 
-4. The number of published works from 2000 to 2024 is better modeled using a segmented regression with a break point at the year 2020 than a singular continuous linear regression for all five fields. 
+4. The annual number of published works from 2000 to 2024 is better modeled using a segmented linear regression with a break point at the year 2020 than a singular continuous linear regression for all five fields. 
 
-From the data, it is clear that humanities-related fields receive consistently less research attention and are now experiencing a more pronounced decline in annual number of published works compared to medicine post-pandemic. 
+From the data, it is clear that fields in the humanities receive consistently less research attention and are now experiencing a more pronounced decline in annual number of published works compared to medicine post-pandemic. 
 
-Our findings cannot establish that the COVID-19 pandemic directly caused the abrupt decrease in the number of humanities-related published works observed after 2020, as external factors were not controlled for. Chow's Test only establishes the statistical significance of the structural break point at 2020, but it does not provide any insight as to its cause. The observed decrease in the number of published works after 2020 may be linked to a multitude of notable events that occurred that year, such as the COVID-19 pandemic, widespread economic struggle as a result of the pandemic, the historic U.S. presidential election, or protests in America. Additionally, the slight decrease in the number of medical-related published works observed after 2020 could be linked to the reduced need for studying the SARS-CoV-2 virus following the development of its vaccine. However, these hypotheses as to the abrupt change in published work trends are unable to be statistically verified.  
+Our findings cannot establish that the COVID-19 pandemic directly caused the abrupt decrease in the annual number of humanities-related published works observed after 2020, as external factors were not controlled for. Chow's Test only establishes the statistical significance of the structural break point at 2020, but it does not provide any insight as to its cause. The observed decrease in the annual number of published works after 2020 may be linked to a multitude of notable events that occurred that year, such as the COVID-19 pandemic, widespread economic struggle as a result of the pandemic, the historic U.S. presidential election, or protests in America. 
 
-Given the current continuing decrease in the number of published works despite the resolution of COVID-19 and other possible causes previously discussed, there is an evident need to increase support and funding for research in the humanities. We hope our findings can be used to inform such efforts. 
+Additionally, the slight decrease in the annual number of medical-related published works observed after 2020 could be linked to the reduced need for studying the SARS-CoV-2 virus following the development of its vaccine. However, these hypotheses as to the abrupt change in published work trends are unable to be statistically verified.  
 
-## Study Limitations
+Given the current continuing decrease in the annual number of published works despite the resolution of COVID-19 and other possible causes previously discussed, there is an evident need to increase support and funding for research in the humanities. We hope our findings can be used to inform such efforts. 
+
+## Study Limitations and Extensibility
 
 ---
 
-Our analysis is only based on the number of works published on OpenAlex each year which limits the scope of our findings since it is plausible different trends are observed on other databases such as Google Scholar.
+Our analysis is only based on the number of works published on OpenAlex each year which limits the scope of our findings since it is plausible different trends are observed on other databases like Google Scholar.
+
+Reconducting similar analyses with the inclusion of works from a wider variety of databases could be a topic for future investigation. Additionally, future studies could examine trends over a broader range of years and identify additional potential breakpoints that align with historical events, such as the conclusion of World War II in 1945 or the beginning of the Space Race in 1957. 
 
 # Contribution Statement
 
 ---
+
+
+
 
 # Works Cited
 
