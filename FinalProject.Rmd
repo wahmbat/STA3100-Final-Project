@@ -30,11 +30,11 @@ library(grid)
 
 
 
-# Introduction
+# Introduction and Motivations
 
 ---
 
-Immediately following the advent of the COVID-19 pandemic in 2020, the focus of much academic research and funding pivoted towards the medicine and public health sectors. However, the long-term impact of this shift on the prevalence of research in other areas, particularly the humanities, has been overlooked. Our study is motivated by the lack of available information and analysis on this topic, despite it being one of great importance. Research in the humanities, though often disregarded by those in STEM-related fields, is necessary as it fosters critical thinking, empathy, and a greater understanding of human society and culture.  
+Immediately following the advent of the COVID-19 pandemic in 2020, the focus of much academic research and funding pivoted towards the medicine and public health sectors. However, the long-term impact of this shift on the prevalence of research in other areas, particularly the humanities, has been overlooked. Our study is motivated by the lack of available information and analysis on this topic, despite it being one of great importance. Research in the humanities, though often disregarded by those in STEM-related fields, is necessary as it fosters critical thinking, empathy, and a greater understanding of human society and culture. Our study is motivated by this conviction about the value of fields in the humanities.  
 
 A 2021 study investigated the effect of COVID-19 pandemic on the production medicine research and found an estimated 18% decrease in non-COVID-19 related published works. @biomedcentralImpactCOVID19 However, no prior studies have conducted a comprehensive review of the pandemic's effect on the production of research in the humanities.
 
