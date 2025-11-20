@@ -1,5 +1,6 @@
 ---
-title: "STA3100 Final Project Report"
+title: "Investigating Pre and Post-Pandemic Publication Trends in the Humanities and Medicine"
+subtitle: "STA3100 Final Project"
 author: "Anjali Tomerlin and Elena Peden"
 bibliography: final_project_ref.bib
 link-citations: yes
@@ -11,7 +12,7 @@ output:
     toc_float: true
     theme: cosmo
     css: style.css
-date: "2025-11-03"
+date: "2025-12-03"
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -30,28 +31,28 @@ library(grid)
 
 
 
-# Introduction and Motivations
+# Introduction & Motivation
 
 ---
 
-Immediately following the advent of the COVID-19 pandemic in 2020, the focus of much academic research and funding pivoted towards the medicine and public health sectors. However, the long-term impact of this shift on the prevalence of research in other areas, particularly the humanities, has been overlooked. Our study is motivated by the lack of available information and analysis on this topic, despite it being one of great importance. Research in the humanities, though often disregarded by those in STEM-related fields, is necessary as it fosters critical thinking, empathy, and a greater understanding of human society and culture. Our study is motivated by this conviction about the value of fields in the humanities.  
+Immediately following the advent of the COVID-19 pandemic in 2020, the primary focus of academic research and funding pivoted towards medicine and the public health sector. However, the long-term impact of this shift on the prevalence of research in other areas, particularly the humanities, has been overlooked. Our study is motivated by the lack of available information and analysis into this topic, despite it being one of great importance. Research in the humanities, though often disregarded by those in STEM-related fields, is necessary as it fosters critical thinking, empathy, and a greater understanding of human society and culture.
 
-A 2021 study investigated the effect of COVID-19 pandemic on the production medicine research and found an estimated 18% decrease in non-COVID-19 related published works. @biomedcentralImpactCOVID19 However, no prior studies have conducted a comprehensive review of the pandemic's effect on the production of research in the humanities.
+A 2021 study investigated the effect of COVID-19 pandemic on the production medicine-related research and found an estimated 18% decrease in non-COVID-19 related published works. @biomedcentralImpactCOVID19 However, no prior studies have conducted a comprehensive review of the pandemic's effect on the production of research in the humanities.
 
 ## Objectives
 
 ---
 
-Five years after the initial COVID-19 outbreak, we aim to investigate and compare the trends in the annual number of published works in medicine and fields in the humanities---specifically history, philosophy, art, and literature---before and after the pandemic. We also aim to compare more generally the number of published works in the humanities with those in medicine. Our analysis will highlight any potential difference in research productivity between medicine and the humanities or general patterns of decline in research pre and post-pandemic. By doing so, we hope to call attention to the importance of the humanities and, more broadly, research in academia.
+Five years after the initial COVID-19 outbreak, we aim to investigate and compare trends in the annual number of published works in medicine and fields in the humanities before and after the pandemic. To accurately represent its broad scope, we chose to consider the following four popular but diverse fields within the humanities: history, philosophy, art, and literature. We also aim to compare more generally the number of published works in the humanities with those in medicine. Our analysis will highlight any potential difference in research productivity between medicine and the humanities as well as any shifts in research activity post-pandemic. By doing so, we hope to call attention to the importance of the humanities and, more broadly, research in academia.
 
 
 # Data & Exploratory Analysis
 
 ---
 
-The data sets used in our project are sourced from OpenAlex, an open-source catalog of scholarly works. OpenAlex categorizes works using a hierarchical structure known as *concepts*. There are 19 root-level concepts, which represent broad categories of research such as Engineering and History, and 6 branching layers of concepts, each increasing in topic specificity. @openalexConceptsOpenAlex
+We utilized data sets sourced from OpenAlex, an open-source catalog of scholarly works similar to Google Scholar. OpenAlex categorizes works using a hierarchical structure known as *concepts*. There are 19 root-level concepts, which represent broad categories of research such as Engineering and History, and 6 branching layers of concepts, each increasing in topic specificity. @openalexConceptsOpenAlex
 
-We utilize OpenAlex's data sets for the annual number of published works whose concept classifiers are history, @openalexOpenAlexhistory philosophy, @openalexOpenAlexphilo art, @openalexOpenAlexart literature, @openalexOpenAlexlit and medicine. @openalexOpenAlexmedicine All of these fall into level 0 of the concept hierarchy, the most broad category, except for literature, which is slightly more specific at level 1. Although each of these OpenAlex data sets have values dating back to 1826, our analysis only considers those from years 2000 to 2024 for relevancy. 
+We specifically utilized OpenAlex's data sets for the annual number of published works whose concept classifiers are history, @openalexOpenAlexhistory philosophy, @openalexOpenAlexphilo art, @openalexOpenAlexart literature, @openalexOpenAlexlit and medicine. @openalexOpenAlexmedicine All of these fields fall into level 0 of the concept hierarchy, the most broad category, except for literature, which is slightly more specific at level 1. Although each of these OpenAlex data sets have values dating back as far as 1826, our analysis only considers those from years 2000 to 2024 for relevancy and to avoid inaccuracies associated with pre-internet era records.
 
 ## Trend Evaluation
 
@@ -69,7 +70,7 @@ ggplot(all_topics,aes(x=name,y=count,color=topic)) + geom_point() + labs(title="
 
 ---
 
-It is clear from the scatterplot above that all four fields in the humanities---history, philosophy, art, and literature---display an increasing trend in number of published works from 2000 to 2020 and a decreasing trend thereafter.
+It is clear from the scatterplot above that all four fields in the humanities---history, philosophy, art, and literature---display an increasing trend in the annual number of published works from 2000 to 2020 and a decreasing trend thereafter.
 
 ---
 
@@ -82,7 +83,7 @@ grid.arrange(pre2020,post2020)
 
 ---
 
-However, medicine is distinct as it displays a clear upward trend in the annual number of published works from 2000 to 2020 but does not exhibit an immediately apparent pattern thereafter. Additionally, the annual number of medicine-related works spikes in 2020, presumably due to the increased medical research conducted to address the emerging pandemic. 
+However, medicine is distinct as it displays a clear upward trend in the annual number of published works from 2000 to 2020 but does not exhibit an immediately apparent trend thereafter. Additionally, the number of medicine-related works spikes in 2020, presumably in response to the emerging pandemic and worldwide effort to develop a vaccine for the SARS-CoV-2 virus. 
 
 ---
 
@@ -93,7 +94,7 @@ post2020 <- ggplot(filter(medicine,name>=2020,name<=2024),aes(x=name,y=count)) +
 grid.arrange(pre2020,post2020)
 ```
 
-These trends suggest a decline in emphasis on funding and publishing humanities-related research following the pandemic in 2020 whereas the field of medicine experienced little such effect, remaining relatively stable. However, further analysis is required to establish this (See [Analysis and Results](#analysis-and-results)).
+These trends suggest a decline in emphasis on funding and publishing humanities-related research following the pandemic in 2020 whereas the field of medicine experienced little such effect, remaining relatively stable in research output. However, further analysis is required to establish this (See [Analysis and Results](#analysis-and-results)).
 
 ## Comparing Fields
 
@@ -122,9 +123,9 @@ med_2019 <- round(mean(medicine$count))
 diff_2019 <- format(med_2019-hum_2019,scientific=FALSE)
 ```
 
-The average annual number of medicine-related published works exceeds the average annual number of published works across all four fields in the humanities aggregated together from 2000 to 2024 by `r diff_2024`. This is true even for years prior to 2020, with a difference of `r diff_2019`, indicating that medicine was a consistently more productive field of research than those in the humanities even prior to the pandemic. 
+The average annual number of medicine-related published works exceeds the average annual number of published works across all four fields in the humanities aggregated together from 2000 to 2024 by `r diff_2024`. This is true even for years prior to 2020, with a difference of `r diff_2019`, indicating that medicine was a consistently more productive area of research than fields in the humanities even prior to the pandemic. 
 
-Additionally, the average number published works from 2000 to 2024 varies much more between medicine the humanities than between the humanities fields themselves. 
+Additionally, the average annual number published works from 2000 to 2024 varies much more between medicine the humanities than between the humanities fields themselves. This indicates that fields in the humanities receive a similar amount of research attention when compared to medicine, which attracts much more research focus and produces substantially more publications every year. 
 
 ---
 
@@ -137,7 +138,7 @@ medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> filter(n
 
 mean_df <- data.frame(group = as.factor(c("History","Philosophy","Art","Literature","Medicine")),m=c(mean(history$count),mean(philo$count),mean(art$count),mean(lit$count),mean(medicine$count)))
 
-diff_matrix <- outer(mean_df$m,mean_df$m,"-")
+diff_matrix <- outer(mean_df$m,mean_df$m, function(x,y) abs(x-y))
 rownames(diff_matrix) <- mean_df$group
 colnames(diff_matrix) <- mean_df$group
 
@@ -146,12 +147,12 @@ colnames(diff_table) <- c("field1","field2","diff")
 
 diff_table <- mutate(diff_table,i=match(field1,mean_df$group),j=match(field2,mean_df$group)) |> filter(i>j)
 
-ggplot(diff_table,aes(x=field1,y=field2,fill=diff)) + geom_tile(color="white") + geom_text(aes(label=round(diff)),color="black",size=4) + scale_fill_gradient(low="lightblue",high="mediumpurple",name="Mean Difference") + labs(x=NULL,y=NULL,title="Pairwise Mean Differences in Annual Number of Published Works (2000-2024)")+ theme(plot.title = element_text(hjust = 0.5))
+ggplot(diff_table,aes(x=field1,y=field2,fill=diff)) + geom_tile(color="white") + geom_text(aes(label=round(diff)),color="black",size=4) + scale_fill_gradient(low="lightblue",high="purple",name="Absolute Mean Difference") + labs(x=NULL,y=NULL,title="Pairwise Absolute Mean Differences in Annual Number of Published Works (2000-2024)")+ theme(plot.title = element_text(hjust = 0.5),legend.title = element_text(margin = margin(b = 10)))
 ```
 
 ---
 
-The variation in annual number of published works from 2000 to 2024 is much higher for medicine than the four fields in the humanities, reflecting its steeper upward trend in publication output over time. 
+The variation in the annual number of published works from 2000 to 2024 is much higher for medicine than the four fields in the humanities, reflecting its steeper upward trend in publication output over time. 
 
 ---
 
@@ -180,23 +181,23 @@ all_topics <- bind_rows(history,philo,art,lit,medicine) |> filter(name <=2024, n
 ggplot(all_topics,aes(x=topic,y=count)) + geom_boxplot() + labs(title="Annual Number of Published Works Across Fields (2000-2024)",y="Number of Published Works",x=NULL)+ theme(plot.title = element_text(hjust = 0.5))
 ```
 
-# Analysis and Results
+# Analysis & Results
 
 ---
 
 Our primary analysis will consist of two procedures:
 
-1. Conduct an interrupted time-series (ITS) analysis on the annual number of published works before and after the onset of the COVID-19 pandemic in 2020 for each of the five research fields---history, philosophy, art, literature, and medicine---using multiple segmented linear regression models.
+1. Conduct an interrupted time-series (ITS) analysis on the annual number of published works before and after the onset of the COVID-19 pandemic in 2020 for each of the five research fields---history, philosophy, art, literature, and medicine---using multiple segmented linear regressions.
 
-2. Perform Chow's Test to evaluate whether the year 2020, marking first outbreak of the COVID-19 pandemic, corresponds to a statistically significant shift in the parameters of the previously constructed segmented linear regressions. 
+2. Perform Chow's Test to evaluate whether the year 2020, marking the outbreak of the COVID-19 pandemic, corresponds to a statistically significant shift in the parameters of the previously constructed segmented linear regressions. 
 
 ## ITS Analysis
 
 ---
 
-The data for each of the five research fields will be split into two groups, data prior to and at the start of the COVID-19 pandemic (years 2000 to 2020) and after the pandemic's initial outbreak (years 2021 to 2024). Five segmented linear regressions will be constructed each with a singular structural break point at the year 2020. This will result in five separate piecewise functions for each field with the independent variable $\small t$, measured in years since 2000, and dependent variable $\small \hat{y}(t)$, the estimated number of works published in that field at time $\small t$. 
+The data for each of the five research fields will be split into two groups, data collected prior to and at the start of the COVID-19 pandemic (years 2000 to 2020) and after the pandemic's initial outbreak (years 2021 to 2024). Five segmented linear regressions will be constructed each with a singular break point at the year 2020. This will result in five separate piecewise functions for each field with the independent variable $\small t$, measured in years since 2000, and dependent variable $\small \hat{y}(t)$, the estimated number of works published in that field at corresponding year $\small t$. 
 
-The segmented linear regression model constructs a linear regression using the method of ordinary least squares for points before and after a number of specified break points while ensuring continuity between regression segments at the break point. This ensures that the two separate linear regression functions which are constructed for $\small t\leq20$ and $\small t>20$ meet at $\small t=20$ exactly. A segmented linear regression model for the number of of works $\small Y_i$ published at a time $\small t_i$, measured in years since 2000 is formulated as follows:
+The segmented linear regression model constructs separate linear models using the method of ordinary least squares for points before and after a number of specified break points while ensuring continuity between regression segments at the break points. For each field, we will construct a segmented linear regression with a singular break point at the year 2020, resulting in two separate linear regression functions for $\small t\leq20$ and $\small t>20$ that meet at $\small t=20$ exactly. A segmented linear regression model for the number of works $\small Y_i$ published at time $\small t_i$, measured in years since 2000 is formulated as follows:
 
 ---
 
@@ -350,9 +351,9 @@ med_plot
 
 ---
 
-All four fields in the humanities display a strong increasing linear trend in annual number of published works from the years 2000 to 2020 and, starting from 2021 onward, decrease linearly at a rate higher than their previous increase. 
+All four fields in the humanities display a strong increasing linear trend in the number of published works from the years 2000 to 2020 and, starting from 2021 onward, decrease linearly at a rate higher than their previous increase. 
 
-Medicine also displays a strong increasing linear trend from the years 2000 to 2020 and starts to decrease starting from 2021 onward but at a rate much lower than its previous increase.
+Medicine also displays a strong increasing linear trend from the years 2000 to 2020 and decreases from 2021 onward but at a rate much lower than its previous increase, distinguishing itself from the fields in the humanities. 
 
 ## Extrapolating Trends
 
@@ -394,7 +395,7 @@ gt(pred_df,rowname_col="names")|> cols_label(`2027`="Predicted Value",perc_dec="
 
 These percentage decreases reveal that medicine experienced, and is projected to experience, a relatively smaller decline in the annual number of published works compared to the four fields in the humanities.
 
-It is important to note that these extrapolated values are tentative estimations made under the strong assumption that the current downward trend in the annual number of published works in each field will continue.
+It is important to note that these extrapolated values are tentative estimations made under the strong assumption that the current downward trend in the annual number of published works in each field will continue and at the same rate.
 
 ## Assessing Model Fit
 
@@ -418,7 +419,7 @@ gt(r_table,rowname_col="names")|> cols_label(r=html("Adj. r<sup>2</sup>")) |> ta
 
 ---
 
-The high adjusted $\small r^2$ values ($\small r^2>0.9)$ indicate that a large proportion of variation in the annual number of published works was explained by the segmented linear regressions constructed. This indicates that the segmented regressions for all five fields provided a good fit to the data. 
+The high adjusted $\small r^2$ values ($\small r^2>0.9)$ indicate that a large proportion of variation in the annual number of published works is explained by the segmented linear regressions constructed. This indicates that the segmented regressions for all five fields provide a good fit to the data. 
 
 However, to test the significance of the supposed structural break point at $\small t=20$, a procedure known as Chow's test must be used. 
 
@@ -426,7 +427,7 @@ However, to test the significance of the supposed structural break point at $\sm
 
 ---
 
-Chow's test is a econometric procedure typically to test the significance of a known structural break point in time series data, or a specific time when the linear regression parameters are expected to change substantially, such as the onset of the COVID-19 pandemic in 2020. @statologyWhatChow Chow's test requires the data is split into two groups---data prior to the hypothesized structural break point (years 2000 to 2020) and after it (years 2021 to 2024). The following null and alternative hypotheses are tested:
+Chow's test is a econometric procedure typically used to test the significance of a known *structural break point* in time series data, or a specific time when the linear regression parameters are expected to change substantially, such as the onset of the COVID-19 pandemic in 2020. @statologyWhatChow Chow's test requires the data is split into two groups---data prior to the hypothesized structural break point (years 2000 to 2020) and after it (years 2021 to 2024). The following null and alternative hypotheses are tested:
 
 - $H_0$: There is not a structural break point in the data and a pooled regression (one that does not split the data into two groups) fits the data sufficiently well.
 
@@ -500,7 +501,9 @@ gt(frame_result,rowname_col="names")|> cols_label(ts="Test Statistic",p="P Value
 
 ---
 
-The results of Chow's Test for all five fields are statistically significant at all commonly used alpha level. This indicates the presence of a structural break point in the data at the year 2020. Therefore, the annual number of published works in each field should be modeled using a segmented regression, with separate linear trends for $\small t\leq20$ and $\small t>20$, rather than a single continuous linear regression. 
+The results of Chow's Test for all five fields are statistically significant at all commonly used alpha levels. This indicates the presence of a structural break point in the data at the year 2020. Therefore, the annual number of published works in each field should be modeled using a segmented regression, with separate linear trends for $\small t\leq20$ and $\small t>20$, rather than a single continuous linear regression. 
+
+This indicates that there was a significant shift in research publication trends following the pandemic in 2020; specifically, there was an abrupt decrease in publication output across all five fields but most pronouncedly among the four fields in the humanities. However, typically statistical analyses, including Chow's test, are unable to confirm or deny that the COVID-19 pandemic *caused* this observed decrease in the annual number of published works for each field and it can only be speculated as such.
 
 # Conclusion
 
@@ -512,19 +515,17 @@ We analyzed the annual number of published works the humanities and medicine on 
 
 2. From 2021 to 2024, medicine experienced a relatively smaller decline in the annual number of published works compared to the four fields in the humanities. This trend is projected to continue in future years. 
 
-3. Medicine was the most productive field of research among the five both before and after the pandemic, producing more published works per year, on average, than all four fields in the humanities.
+3. Medicine was the most productive field of research among the five both before and after the pandemic, producing more published works per year, on average, than all four fields in the humanities. The four studied fields in the humanities receive a similar amount of research attention compared to medicine, which garners much more research focus and produces many more publications per year, on average. 
 
-4. The annual number of published works from 2000 to 2024 is better modeled using a segmented linear regression with a break point at the year 2020 than a singular continuous linear regression for all five fields. 
+4. Across all five fields, the annual number of published works from 2000 to 2024 is better modeled using a segmented linear regression with a break point at the year 2020 than a singular continuous linear regression. 
 
 From the data, it is clear that fields in the humanities receive consistently less research attention and are now experiencing a more pronounced decline in annual number of published works compared to medicine post-pandemic. 
 
-Our findings cannot establish that the COVID-19 pandemic directly caused the abrupt decrease in the annual number of humanities-related published works observed after 2020, as external factors were not controlled for. Chow's Test only establishes the statistical significance of the structural break point at 2020, but it does not provide any insight as to its cause. The observed decrease in the annual number of published works after 2020 may be linked to a multitude of notable events that occurred that year, such as the COVID-19 pandemic, widespread economic struggle as a result of the pandemic, the historic U.S. presidential election, or protests in America. 
+Our findings cannot establish that the COVID-19 pandemic directly caused the abrupt decrease in the annual number of humanities-related published works observed after 2020, as external factors were not controlled for. Chow's Test only establishes the statistical significance of the structural break point at 2020, but it does not provide any insight as to its cause. The observed decrease in the annual number of published works after 2020 may be linked to a multitude of notable events that occurred that year, such as the COVID-19 pandemic, widespread economic struggle as a result of the pandemic, the historic U.S. presidential election, or protests in America. Additionally, the slight decrease in the annual number of medical-related published works observed after 2020 could be linked to the reduced need for studying the SARS-CoV-2 virus following the development of its vaccine. However, these hypotheses as to the abrupt change in published work trends are unable to be statistically verified.  
 
-Additionally, the slight decrease in the annual number of medical-related published works observed after 2020 could be linked to the reduced need for studying the SARS-CoV-2 virus following the development of its vaccine. However, these hypotheses as to the abrupt change in published work trends are unable to be statistically verified.  
+Given the current continuing decrease research publication output despite the resolution of the COVID-19 pandemic and the other possible causes previously discussed, there is an evident need to increase support and funding for research in the humanities. We hope our findings can be used to inform such efforts. 
 
-Given the current continuing decrease in the annual number of published works despite the resolution of COVID-19 and other possible causes previously discussed, there is an evident need to increase support and funding for research in the humanities. We hope our findings can be used to inform such efforts. 
-
-## Study Limitations and Extensibility
+## Limitations & Extensibility
 
 ---
 
