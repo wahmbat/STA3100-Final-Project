@@ -224,7 +224,7 @@ Alternatively, the model can be formulated as the following piecewise function:
 $$Y_i=\begin{cases} \beta_0+\beta_1t_i+\epsilon_i &\text{if } t \leq 20 \\ (\beta_0-20\beta_2)+(\beta_1+\beta_2)t_i+\epsilon_i &\text{if } t > 20 \end{cases}$$
 <br>
 
-We will utilize this formulation going forward. From this model, the following regression with estimated coefficients can be calculated for each field:
+This formulation will be utilized going forward. From this model, the following regression with estimated coefficients can be calculated for each field:
 
 ---
 
@@ -340,7 +340,7 @@ gt(reg_table,rowname_col="names")|> cols_label(a1=html("a<sub>1</sub>"),b1=html(
 ---
 
 ```{r Regression Plots Humanities,fig.align='center'}
-grid.arrange(hist_plot,philo_plot,art_plot,lit_plot,top=textGrob("Segmented Regressions for Annual Number of Humanities-Related Works",gp=gpar(fontsize = 14)),padding = unit(1, "lines"))
+grid.arrange(hist_plot,philo_plot,art_plot,lit_plot,top=textGrob("Segmented Regressions for Annual Number of Humanities-Related Works \n Versus Years Since 2000",gp=gpar(fontsize = 14)),padding = unit(1, "lines"))
 ```
 
 <br>
