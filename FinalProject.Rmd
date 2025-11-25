@@ -427,7 +427,7 @@ However, to test the significance of the supposed structural break point at $\sm
 
 ---
 
-Chow's test is a econometric procedure typically used to test the significance of a known *structural break point* in time series data, or a specific time when the linear regression parameters are expected to change substantially, such as the onset of the COVID-19 pandemic in 2020. @statologyWhatChow Chow's test requires the data is split into two groups---data prior to the hypothesized structural break point (years 2000 to 2020) and after it (years 2021 to 2024). The following null and alternative hypotheses are tested:
+Chow's test is a econometric procedure typically used to test the significance of a known *structural break point* in a time series, or a specific time when the linear regression parameters are expected to change substantially, such as the onset of the COVID-19 pandemic in 2020. @statologyWhatChow Chow's test requires the data is split into two groups---data prior to the hypothesized structural break point (years 2000 to 2020) and after it (years 2021 to 2024). The following null and alternative hypotheses are tested:
 
 - $H_0$: There is not a structural break point in the data and a pooled regression (one that does not split the data into two groups) fits the data sufficiently well.
 
@@ -509,7 +509,7 @@ This indicates that there was a significant shift in research publication trends
 
 ---
 
-We analyzed the annual number of published works the humanities and medicine on OpenAlex from 2000 to 2024. To accurately represent the broadness of humanities we considered data from four different fields: history, philosophy, art, and literature. Comparing this data to that from medicine revealed a few key observations and trends:
+We analyzed the annual number of published works the humanities and medicine on OpenAlex from 2000 to 2024. To accurately represent the broadness of humanities we considered data from four different fields: history, philosophy, art, and literature. We aimed to compare trends in the annual number of published works in medicine and in the humanities, both in a general sense and specifically before and after the pandemic. Our analysis, which consisted of an interrupted time-series analysis using a multiple segmented regressions as well as Chow's Test, revealed a few key observations and trends:
 
 1. All five fields experienced an increase in the annual number of published works from 2000 to 2020 and an abrupt decrease afterwards, presumably as a result of the COVID-19 pandemic. 
 
