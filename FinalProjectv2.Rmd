@@ -30,7 +30,7 @@ library(grid)
 ---
 
 
-Academic research contains a variety of fields including but not limited to natural sciences and the humanities. After the pandemic in 2020, prioritization of research redirected to disproportionately emphasize the medical field. The long-term impact of this shift away from the humanities has gone largely unexplored. This study uses publication counts on OpenAlex from the past 25 years to examine the trends in medical research versus research in the humanities, defined as: history, philosophy, art, and literature. Initial analysis showed a consistent increase in published works across all fields up until the year 2020. In 2021, the humanities revealed a sharp decline, while medicine only fell off moderately after a positive spike in 2020. Interrupted time-series analysis via segmented linear regression with a structural break at 2020 produced excellent fit (adjusted $\small r^2 > 0.90$ across fields). Chow tests confirmed statistically significant structural breaks in all five fields ($\small p < 0.001$). Consistently there has been a much stronger emphasis on research in medicine over the humanities and the trends after 2020 are only increasing the disproportion. These findings underscore the need for a stronger emphasis on research in the humanities.
+Academic research contains a variety of fields including but not limited to natural sciences and the humanities. After the pandemic in 2020, prioritization of research redirected to disproportionately emphasize the medical field. The long-term impact of this shift away from the humanities has gone largely unexplored. This study uses annual publication counts on OpenAlex from the past 25 years to examine the trends in medical research versus research in the humanities, defined as history, philosophy, art, and literature. Initial analysis showed a consistent increase in published works across all fields up until the year 2020. In 2021, the humanities revealed a sharp decline, while medicine only fell off moderately after a positive spike in 2020. An interrupted time-series analysis via segmented linear regressions with a structural break at 2020 for each field produced excellent fits (adjusted $\small r^2 > 0.90$ across fields). Multiple Chow's Tests conducted using the aforementioned segmented linear regressions confirmed statistically significant structural breaks at 2020 in all five fields ($\small p < 0.001$). Consistently, there has been a much stronger emphasis on research in medicine over the humanities and the trends after 2020 are only increasing the disproportion. These findings underscore the need for a stronger emphasis on research in the humanities.
 
 
 # Introduction & Motivation
@@ -126,6 +126,7 @@ hum_2019 <- round(mean(c(history$count,philo$count,art$count,lit$count)))
 med_2019 <- round(mean(medicine$count))
 diff_2019 <- format(med_2019-hum_2019,scientific=FALSE)
 ```
+
 The average annual number of medicine-related published works exceeded the average annual number of published works across all four humanities-related fields aggregated together from 2000 to 2024 by `r diff_2024`. This was true even for years prior to 2020, with a difference of `r diff_2019`, indicating that medicine was a consistently more productive field of research than those in the humanities even prior to the pandemic.
 
 Additionally, the average annual number of published works from 2000 to 2024 varied much more between medicine and the humanities than between the humanities fields themselves. This indicates that fields in the humanities receive a similar amount of research attention when compared to medicine, which attracts much more research focus and produces substantially more publications every year. 
@@ -409,7 +410,7 @@ It is important to note that these extrapolated values are tentative estimations
 The following table reports the adjusted $\small r^2$ values for each segmented regression:
 
 
-```{r}
+```{r R Squared Table}
 r_hist <- round(summary(segmented_ols_hist)$adj.r.squared,4)
 r_philo <- round(summary(segmented_ols_philo)$adj.r.squared,4)
 r_art <- round(summary(segmented_ols_art)$adj.r.squared,4)
@@ -467,6 +468,12 @@ Using the previously constructed segmented regressions for each field, the follo
 
 
 ```{r Chow Test Results}
+history <- read_csv("./history_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+philo <- read_csv("./philosophy_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+art <- read_csv("./art_counts.csv",show_col_types = FALSE) |>  filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+lit <- read_csv("./literature_counts.csv",show_col_types = FALSE) |>  filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+medicine <- read_csv("./medicine_counts.csv",show_col_types = FALSE) |> filter(name<=2024,name>=2000) |> mutate(name=name-2000)
+
 chow <- function(data,init_mod,i1,c1,i2,c2){
   g1 <- filter(data,name<=20)
   g2 <- filter(data,name>20)
@@ -474,7 +481,7 @@ chow <- function(data,init_mod,i1,c1,i2,c2){
   c1 <- as.numeric(c1)
   i2 <- as.numeric(i2)
   c2 <- as.numeric(c2)
- 
+  
   t_rss <- sum(resid(init_mod)^2)
   rss_1 <- sum((g1$count - (i1+(g1$name)*(c1)))^2)
   rss_2 <- sum((g2$count - (i2+(g2$name)*(c2)))^2)
@@ -491,8 +498,8 @@ med_result <- chow(medicine,init_ols_med,med_intercept_1,med_coef_1,med_intercep
 
 
 list_result <- list(hist_result,philo_result,art_result,lit_result,med_result)
-list_result <- lapply(list_result,function(x){
-  x[1]<-round(x[1],digits=2)
+list_result <- lapply(list_result,function(x){ 
+  x[1]<-round(x[1],digits=2) 
 x})
 frame_result <- data.frame(names=c("History","Philosophy","Art","Literature","Medicine"),ts=sapply(list_result,`[`,1),p=c("< 0.001","< 0.001","< 0.001","< 0.001","< 0.001"))
 
@@ -526,11 +533,18 @@ Our findings cannot establish that the COVID-19 pandemic directly caused the abr
 
 Given the current continuing decrease in the number of published works despite the resolution of COVID-19 and other possible causes previously discussed, there is an evident need to increase support and funding for research in the humanities. We hope our findings can be used to inform such efforts.
 
-## Limitations & Extensibility
+## Study Limitations
 
 ---
 
-Our analysis is only based on the number of works published on OpenAlex each year which limits the scope of our findings since it is plausible different trends are observed on other databases such as Google Scholar. Additionally, as there are still lingering effects socially and economically despite the end of many of the possible causes listed previously, these trends may be temporary and are still subject to change as global events continue to impact academia. Finally, the broad nature of the field of medicine, and the need for replication in scientific fields may account for such a large difference in the number of medicine versus humanities related studies. However, this does not negate from the fact that the studies are happening and therefore being prioritized and funded. Additionally, the trends should remain consistent despite any alternative explanation for why the medicine published works is so much greater than the humanities.
+Our analysis is only based on the number of works published on OpenAlex each year which limits the scope of our findings since it is plausible different trends are observed on other databases such as Google Scholar.
+
+Additionally, as there are still lingering effects socially and economically despite the end of many of the possible causes listed previously, these trends may be temporary and are still subject to change as global events continue to impact academia. Finally, the broad nature of the field of medicine, and the need for replication in scientific fields may account for such a large difference in the number of medicine versus humanities related published works. However, this does not negate from the fact that medicine is disproportionately prioritized and funded compared to the humanities. Additionally, the trends should remain consistent despite any alternative explanation for why the number of published works in medicine is so much greater than the humanities.
+
+
+## Study Extensibility
+
+--- 
 
 Reconducting similar analyses with the inclusion of works from a wider variety of databases could be a topic for future investigation. Additionally, future studies could examine trends over a broader range of years and identify additional potential breakpoints that align with historical events, such as the conclusion of World War II in 1945 or the beginning of the Space Race in 1957. 
 
@@ -538,6 +552,8 @@ Reconducting similar analyses with the inclusion of works from a wider variety o
 # Contribution Statement
 
 ---
+
+As a pair, we decided on the topic of our final project and the objectives and methods of our analysis. Elena found the background information and the study cited in the introduction while Anjali got the data from OpenAlex (which was initially obtained via web-scraping but after unexpected database errors on OpenAlex's end, was retrieved from archives of OpenAlex's official website). As for the division of labor, Elena mostly completed the preliminary trend evaluations / plots and ITS analysis (segmented regressions and interpretation) while Anjali completed the "Comparing Fields" section and performed and interpreted the results of the Chow's Tests. As for the writing and making of the final report itself, Elena wrote most of the abstract and conclusion while Anjali completed the study limitations, extensibility, Works Cited sections and made a custom CSS file for the final report. Though most of the work was divided cleanly between the two of us, both of us checked each others' work along the way. 
 
 # Works Cited
 
