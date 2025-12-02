@@ -97,7 +97,7 @@ post2020 <- ggplot(filter(medicine,name>=2020,name<=2024),aes(x=name,y=count)) +
 grid.arrange(pre2020,post2020)
 ```
 
-These trends suggested that, following the pandemic in 2020, there was a decline in emphasis on the funding and publishing of humanities-related research. However, the decline in emphasis on research in the medical field was less substantive, resulting in relative stability for medicine published works as opposed to the previous growth. However, further analysis was required to establish this (See [Analysis & Results](#analysis-results)).
+These trends suggest that, following the pandemic in 2020, there was a decline in emphasis on the funding and publishing of humanities-related research. However, the decline in emphasis on research in the medical field was less substantive, resulting in relative stability for medicine published works as opposed to the previous growth. However, further analysis was required to establish this (See [Analysis & Results](#analysis-results)).
 
 
 ## Comparing Fields
